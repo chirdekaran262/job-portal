@@ -1,0 +1,16 @@
+# Root .gitignore
+node_modules/
+build/
+dist/
+.env
+
+# backend/.gitignore
+target/
+*.iml
+*.log
+.idea/
+
+# frontend/.gitignore
+node_modules/
+build/
+.env

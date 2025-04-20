@@ -1,0 +1,82 @@
+.company-details-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.company-header {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.company-header h1 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.company-header .rating {
+    font-size: 1.1rem;
+    color: #f39c12;
+}
+
+.reviews-section {
+    margin-bottom: 2rem;
+}
+
+.review-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.review-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-card h3 {
+    color: #3498db;
+    margin-bottom: 0.5rem;
+}
+
+.review-rating {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.add-review-form {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-review-form input,
+.add-review-form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.add-review-form button {
+    background-color: #3498db;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-review-form button:hover {
+    background-color: #2980b9;
+}
