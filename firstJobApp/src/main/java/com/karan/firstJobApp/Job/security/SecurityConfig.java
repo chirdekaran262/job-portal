@@ -38,6 +38,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/applications/**").authenticated()
                         .requestMatchers("/api/applications/apply").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/api/applications/company/**").hasAnyRole("COMPANY", "ADMIN")
+                        .requestMatchers("/applications/*/status").hasRole("COMPANY")
+                        .requestMatchers("/applications/company/**").hasRole("COMPANY")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement()

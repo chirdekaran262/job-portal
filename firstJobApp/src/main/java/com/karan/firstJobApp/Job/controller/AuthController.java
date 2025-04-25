@@ -1,6 +1,8 @@
 package com.karan.firstJobApp.Job.controller;
 
+import com.karan.firstJobApp.Job.model.Company;
 import com.karan.firstJobApp.Job.model.Users;
+import com.karan.firstJobApp.Job.repo.CompanyRepository;
 import com.karan.firstJobApp.Job.repo.UserRepository;
 import com.karan.firstJobApp.Job.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +38,9 @@ public class AuthController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CompanyRepository companyRepository;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody Users users) {
@@ -60,7 +66,21 @@ public class AuthController {
             if (users.getRole() == null || users.getRole().isEmpty()) {
                 users.setRole("ROLE_USER");
             }
+            if ("ROLE_COMPANY".equals(users.getRole())) {
+                Company company = new Company();
+                company.setName(users.getFullName()); // Set initial name from user's full name
+                company.setDescription(""); // Empty description initially
 
+                // Initialize collections if needed
+                company.setJobs(new ArrayList<>());
+                company.setReviews(new ArrayList<>());
+
+                // Save company first to get ID
+                companyRepository.save(company);
+
+                // Associate company with user
+                users.setCompany(company);
+            }
             // Save user
             userRepo.save(users);
 

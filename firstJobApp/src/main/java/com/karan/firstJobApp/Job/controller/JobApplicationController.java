@@ -1,10 +1,14 @@
 package com.karan.firstJobApp.Job.controller;
 
 import com.karan.firstJobApp.Job.model.JobApplication;
+import com.karan.firstJobApp.Job.model.Users;
+import com.karan.firstJobApp.Job.repo.UserRepository;
 import com.karan.firstJobApp.Job.service.JobApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +20,9 @@ public class JobApplicationController {
 
     @Autowired
     private JobApplicationService jobApplicationService;
+
+    @Autowired
+    private UserRepository userRepo;
 
     @GetMapping
     public ResponseEntity<List<JobApplication>> getAllApplications() {
@@ -76,7 +83,29 @@ public class JobApplicationController {
     @PutMapping("/{applicationId}/status")
     public ResponseEntity<String> updateApplicationStatus(
             @PathVariable Long applicationId,
-            @RequestBody Map<String, String> statusUpdate) {
+            @RequestBody Map<String, String> statusUpdate,
+            Authentication authentication) {
+
+        // Get the logged-in user
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+
+        // Check if user is a company
+        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+            return new ResponseEntity<>("Only companies can update application status", HttpStatus.FORBIDDEN);
+        }
+
+        // Get the job application
+        JobApplication application = jobApplicationService.getApplicationById(applicationId);
+        if (application == null) {
+            return new ResponseEntity<>("Application not found", HttpStatus.NOT_FOUND);
+        }
+
+        // Check if this application belongs to a job from this company
+        if (!application.getJob().getCompany().getId().equals(currentUser.getCompany().getId())) {
+            return new ResponseEntity<>("You can only update applications for your own company's jobs",
+                    HttpStatus.FORBIDDEN);
+        }
 
         String status = statusUpdate.get("status");
         if (status == null || (!status.equals("CONFIRMED") && !status.equals("REJECTED"))) {

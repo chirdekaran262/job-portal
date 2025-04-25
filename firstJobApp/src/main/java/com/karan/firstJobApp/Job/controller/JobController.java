@@ -1,11 +1,16 @@
 package com.karan.firstJobApp.Job.controller;
 
 
+import com.karan.firstJobApp.Job.model.Company;
 import com.karan.firstJobApp.Job.model.Job;
+import com.karan.firstJobApp.Job.model.Users;
+import com.karan.firstJobApp.Job.repo.UserRepository;
 import com.karan.firstJobApp.Job.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,19 +21,37 @@ public class JobController {
 
     @Autowired
     private JobService jobService;
-
+    @Autowired
+    private UserRepository userRepo;
     @GetMapping
     public ResponseEntity<List<Job>> findAll(){
         return  new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<String> AddJob(@RequestBody Job job){
-        if(job!=null){
-            jobService.addJob(job);
-            return new ResponseEntity<>("Job added", HttpStatus.OK);
+    public ResponseEntity<String> AddJob(@RequestBody Job job, Authentication authentication) {
+        // Get the currently authenticated user
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+
+        // Check if user has ROLE_COMPANY
+        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+            return new ResponseEntity<>("Only companies can post jobs", HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>("Job already exists", HttpStatus.BAD_REQUEST);
+
+        // Get the company associated with this user
+        Company company = currentUser.getCompany();
+
+        if (company == null) {
+            return new ResponseEntity<>("User doesn't have an associated company", HttpStatus.BAD_REQUEST);
+        }
+
+        // Set the company for this job
+        job.setCompany(company);
+
+        // Add the job
+        jobService.addJob(job);
+        return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

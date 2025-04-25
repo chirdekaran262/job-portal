@@ -1,5 +1,7 @@
 package com.karan.firstJobApp.Job.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,10 +39,11 @@ public class Users implements UserDetails {
     @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean enabled=true;
 
-
-
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "user-applications")
+    @JsonIgnore
     private List<JobApplication> applications;
+
 
     @OneToOne
     @JoinColumn(name = "company_id")

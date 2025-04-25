@@ -13,11 +13,11 @@ public class JobApplication {
     @ManyToOne
     private Job job;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonBackReference(value = "user-applications")
     private Users users;
-
 
 
     private LocalDateTime appliedDate;
