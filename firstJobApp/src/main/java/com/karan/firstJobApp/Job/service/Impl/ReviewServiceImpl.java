@@ -61,14 +61,6 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public boolean deleteReview(Long companyId, Long id) {
-//        List<Review> reviews=companyRepository.getCompanyById(companyId).getReviews();
-//        for(Review review:reviews){
-//            if(review.getId().equals(id)){
-//                reviewRepository.delete(review);
-//                return true;
-//            }
-//        }
-//        return false;
 
         if(companyRepository.getCompanyById(companyId)!=null&&reviewRepository.existsById(id)){
             Review review=reviewRepository.findById(id).orElse(null);

@@ -21,7 +21,7 @@ public class CompanyController {
     public ResponseEntity<List<Company>> getAllcompany(){
         List<Company> companyList = companyService.getAllCompany();
         if(companyList.isEmpty()){
-            return new ResponseEntity<>(companyList, HttpStatus.OK); // Return empty list with OK status
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return empty list with OK status
         }
         return new ResponseEntity<>(companyList, HttpStatus.OK);
     }

@@ -32,24 +32,11 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public Job findbyId(Long id) {
-//        for(Job job:jobs){
-//            if(Objects.equals(job.getId(), id)){
-//                return job;
-//            }
-//        }
-//        return null;
         return jobRepo.findById(id).get();
     }
 
     @Override
     public boolean deleteJob(Long id) {
-//        for (Job job : jobs) {
-//            if (Objects.equals(job.getId(), id)) {
-//                jobs.remove(job);
-//                return true;
-//            }
-//        }
-//        return false;
         Job job=jobRepo.findById(id).get();
         if(job!=null){
             jobRepo.delete(job);
@@ -60,18 +47,6 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean updateJob(Long id,Job job) {
-//        for (Job j : jobs) {
-//            if (Objects.equals(j.getId(), id)) {
-//                j.setTitle(job.getTitle());
-//                j.setDescription(job.getDescription());
-//                j.setLocation(job.getLocation());
-//                j.setMinSalary(job.getMinSalary());
-//                j.setMaxSalary(job.getMaxSalary());
-//                return true;
-//
-//            }
-//        }
-//        return false;
         Optional<Job> job1 =jobRepo.findById(id);
         if(job1.isPresent()){
             Job job2=job1.get();
