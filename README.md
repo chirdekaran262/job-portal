@@ -1,7 +1,7 @@
 
 # 💼 Job Portal Application
 
-A full-stack job portal web application built using **Spring Boot** for the backend and **React.js** for the frontend.
+A full-stack **Job Portal** web application built using **Spring Boot** (backend) and **React.js** (frontend), offering seamless interaction between job seekers and employers.
 
 ---
 
@@ -64,11 +64,24 @@ job-portal/
 
 ## ✨ Features
 
-- 📝 Add Jobs
-- 🔍 View Job Listings
-- 🏢 Company Info & Reviews
+- 📝 Add and Manage Job Listings
+- 🔍 Job Search and Filtering
+- 📄 Apply to Jobs with Resume & Cover Letter
+- 🧑‍💼 Role-Based Authentication (Admin, Recruiter, User)
+- 🏢 Company Info & User Reviews
+- 🔐 Secure Login with JWT Authentication
 - 📦 RESTful API with Spring Boot
-- 🎨 Interactive UI with React
+- 🎨 Interactive and Responsive UI with React
+
+---
+
+## 🔐 Role-Based Access Control
+
+| Role      | Functionality                                      |
+|-----------|----------------------------------------------------|
+| Admin     | Manage all users, jobs, and companies              |
+| Recruiter | Post jobs, manage their job listings               |
+| User      | View and apply to jobs, submit reviews             |
 
 ---
 
@@ -77,8 +90,9 @@ job-portal/
 ### Backend:
 - Java 17
 - Spring Boot
+- Spring Security (JWT Auth)
 - Spring Data JPA
-- H2 / MySQL
+- MySQL / H2
 - Maven
 
 ### Frontend:
@@ -88,24 +102,41 @@ job-portal/
 
 ---
 
-## 📦 API Endpoints (Sample)
+## 📦 Sample API Endpoints
 
-| Method | Endpoint             | Description            |
-|--------|----------------------|------------------------|
-| GET    | `/jobs`              | Get all jobs           |
-| POST   | `/jobs`              | Add new job            |
-| GET    | `/companies`         | Get all companies      |
-| POST   | `/companies`         | Add new company        |
-| GET    | `/reviews`           | Get all reviews        |
-
+| Method | Endpoint             | Description                |
+|--------|----------------------|----------------------------|
+| GET    | `/jobs`              | Get all jobs               |
+| POST   | `/jobs`              | Add new job (Recruiter)    |
+| GET    | `/company`           | Get all companies          |
+| POST   | `/company`           | Add new company (Admin)    |
+| GET    | `/reviews`           | Get all reviews            |
+Explore other api in controller class
 ---
 
 ## 🤝 Contributing
 
-Pull requests are welcome! For major changes, open an issue first to discuss what you would like to change.
+We welcome contributions from the community! If you'd like to improve or extend this project:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'feat: add your feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
 ---
 
-## 📝 License
+## 📌 Planned Features
 
-This project is licensed under the MIT License.
+- 🎯 Role-based authentication with distinct dashboards for Admin, Recruiter, and Job Seeker in fronted code
+
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 📧 Contact
+
+Maintained by [Karan Chire](mailto:chirdekaran262@gmail.com). Feel free to reach out with questions or suggestions!
