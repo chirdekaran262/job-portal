@@ -1,80 +1,26 @@
-const API_URL = 'http://localhost:8081/company';
+import { getToken } from './authService';
 
-export const getAllCompanies = async () => {
+export const getCompanyDashboard = async (companyId) => {
     try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
-            throw new Error('Failed to fetch companies');
+        const token = getToken();
+        if (!token) {
+            throw new Error('Authentication required');
         }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching companies:', error);
-        throw error;
-    }
-};
 
-export const getCompanyById = async (id) => {
-    try {
-        const response = await fetch(`${API_URL}/${id}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch company');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching company:', error);
-        throw error;
-    }
-};
-
-export const createCompany = async (companyData) => {
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
+        const response = await fetch(`/company/${companyId}/dashboard`, {
             headers: {
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(companyData),
         });
+
         if (!response.ok) {
-            throw new Error('Failed to create company');
+            throw new Error('Failed to fetch company dashboard data');
         }
+
         return await response.json();
     } catch (error) {
-        console.error('Error creating company:', error);
-        throw error;
-    }
-};
-
-export const updateCompany = async (id, companyData) => {
-    try {
-        const response = await fetch(`${API_URL}/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(companyData),
-        });
-        if (!response.ok) {
-            throw new Error('Failed to update company');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error updating company:', error);
-        throw error;
-    }
-};
-
-export const deleteCompany = async (id) => {
-    try {
-        const response = await fetch(`${API_URL}/${id}`, {
-            method: 'DELETE',
-        });
-        if (!response.ok) {
-            throw new Error('Failed to delete company');
-        }
-        return await response.text(); // since controller returns a message string
-    } catch (error) {
-        console.error('Error deleting company:', error);
+        console.error('Error fetching company dashboard:', error);
         throw error;
     }
 };

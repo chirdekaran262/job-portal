@@ -8,22 +8,20 @@ const JobForm = () => {
     const navigate = useNavigate();
     const isEditMode = !!id;
 
-    const initialFormState = {
+    const [formData, setFormData] = useState({
         title: '',
         description: '',
         location: '',
         minSalary: '',
         maxSalary: '',
-        companyId: 1 // Default company ID
-    };
+    });
 
-    const [formData, setFormData] = useState(initialFormState);
     const [loading, setLoading] = useState(isEditMode);
     const [error, setError] = useState(null);
     const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
-        const fetchJobData = async () => {
+        const fetchJob = async () => {
             if (isEditMode) {
                 try {
                     const job = await getJobById(id);
@@ -33,9 +31,8 @@ const JobForm = () => {
                         location: job.location,
                         minSalary: job.minSalary,
                         maxSalary: job.maxSalary,
-                        companyId: job.companyId || 1
                     });
-                } catch (err) {
+                } catch {
                     setError('Failed to load job data');
                 } finally {
                     setLoading(false);
@@ -43,15 +40,12 @@ const JobForm = () => {
             }
         };
 
-        fetchJobData();
+        fetchJob();
     }, [id, isEditMode]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
@@ -59,15 +53,21 @@ const JobForm = () => {
         setSubmitting(true);
         setError(null);
 
+        const jobData = {
+            ...formData,
+            minSalary: formData.minSalary ? Number(formData.minSalary) : 0,
+            maxSalary: formData.maxSalary ? Number(formData.maxSalary) : 0,
+        };
+
         try {
             if (isEditMode) {
-                await updateJob(id, formData);
+                await updateJob(id, jobData);
             } else {
-                await createJob(formData);
+                await createJob(jobData);
             }
             navigate('/');
         } catch (err) {
-            setError(`Failed to ${isEditMode ? 'update' : 'create'} job. Please try again.`);
+            setError(`Failed to ${isEditMode ? 'update' : 'create'} job: ${err.message}`);
         } finally {
             setSubmitting(false);
         }
@@ -80,21 +80,13 @@ const JobForm = () => {
     return (
         <div className="container">
             <div className="form-container">
-                <h2>
-                    {isEditMode ? 'Edit Job' : 'Add New Job'}
-                </h2>
+                <h2>{isEditMode ? 'Edit Job' : 'Add New Job'}</h2>
 
-                {error && (
-                    <div className="error-message">
-                        {error}
-                    </div>
-                )}
+                {error && <div className="error-message">{error}</div>}
 
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="title">
-                            Job Title
-                        </label>
+                        <label htmlFor="title">Job Title</label>
                         <input
                             type="text"
                             id="title"
@@ -106,9 +98,7 @@ const JobForm = () => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="description">
-                            Description
-                        </label>
+                        <label htmlFor="description">Description</label>
                         <textarea
                             id="description"
                             name="description"
@@ -116,13 +106,11 @@ const JobForm = () => {
                             onChange={handleChange}
                             rows="4"
                             required
-                        ></textarea>
+                        />
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="location">
-                            Location
-                        </label>
+                        <label htmlFor="location">Location</label>
                         <input
                             type="text"
                             id="location"
@@ -135,56 +123,33 @@ const JobForm = () => {
 
                     <div className="form-row">
                         <div className="form-group">
-                            <label htmlFor="minSalary">
-                                Minimum Salary
-                            </label>
+                            <label htmlFor="minSalary">Minimum Salary</label>
                             <input
-                                type="text"
+                                type="number"
                                 id="minSalary"
                                 name="minSalary"
                                 value={formData.minSalary}
                                 onChange={handleChange}
-                                required
+                                min="0"
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="maxSalary">
-                                Maximum Salary
-                            </label>
+                            <label htmlFor="maxSalary">Maximum Salary</label>
                             <input
-                                type="text"
+                                type="number"
                                 id="maxSalary"
                                 name="maxSalary"
                                 value={formData.maxSalary}
                                 onChange={handleChange}
-                                required
+                                min="0"
                             />
                         </div>
                     </div>
 
-                    <div className="button-group">
-                        <button
-                            type="button"
-                            onClick={() => navigate('/')}
-                            className="btn btn-secondary"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            disabled={submitting}
-                            className={`btn btn-primary ${submitting ? 'btn-disabled' : ''
-                                }`}
-                        >
-                            {submitting
-                                ? 'Saving...'
-                                : isEditMode
-                                    ? 'Update Job'
-                                    : 'Create Job'
-                            }
-                        </button>
-                    </div>
+                    <button type="submit" className="btn" disabled={submitting}>
+                        {submitting ? (isEditMode ? 'Updating...' : 'Creating...') : (isEditMode ? 'Update Job' : 'Create Job')}
+                    </button>
                 </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllJobs, deleteJob } from '../services/jobService';
+import { getAllJobs } from '../services/jobService';
 import { Link } from 'react-router-dom';
 import '../styles/components.css';
 
@@ -25,18 +25,6 @@ const JobList = () => {
         fetchJobs();
     }, []);
 
-    const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this job?')) {
-            try {
-                await deleteJob(id);
-                // Refresh job list after deletion
-                fetchJobs();
-            } catch (err) {
-                setError('Failed to delete job. Please try again.');
-            }
-        }
-    };
-
     if (loading) {
         return <div className="loading">Loading jobs...</div>;
     }
@@ -49,9 +37,6 @@ const JobList = () => {
         <div className="container">
             <div className="page-header">
                 <h2>Available Jobs</h2>
-                <Link to="/add" className="btn btn-primary">
-                    Add New Job
-                </Link>
             </div>
 
             {jobs.length === 0 ? (
@@ -69,17 +54,6 @@ const JobList = () => {
                                 <Link to={`/jobs/${job.id}`} className="btn btn-info">
                                     View Details
                                 </Link>
-                                <div>
-                                    <Link to={`/edit/${job.id}`} className="btn btn-warning">
-                                        Edit
-                                    </Link>
-                                    <button
-                                        onClick={() => handleDelete(job.id)}
-                                        className="btn btn-danger"
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     ))}
