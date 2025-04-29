@@ -1,25 +1,19 @@
 import axios from 'axios';
-import { getToken } from './authService';
 
 export const applyForJob = async (jobId, userId, coverLetter = '', resumeUrl = '') => {
     try {
-        const token = getToken();
-        if (!token) {
-            throw new Error('Authentication required');
-        }
+        const params = new URLSearchParams();
+        params.append('jobId', jobId);
+        params.append('userId', userId);
+        params.append('coverLetter', coverLetter);
+        params.append('resumeUrl', resumeUrl);
 
         const response = await axios.post(
             'http://localhost:8081/applications/apply',
-            {
-                jobId,
-                userId,
-                coverLetter,
-                resumeUrl
-            },
+            params,
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 }
             }
         );

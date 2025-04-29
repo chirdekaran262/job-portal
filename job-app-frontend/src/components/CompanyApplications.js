@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getCompanyApplications, updateApplicationStatus } from '../services/jobApplicationService';
-import { useAuth } from '../context/AuthContext'; // Fixed import path
+import { useAuth } from '../context/AuthContext'; // make sure correct path
 
 const CompanyApplications = () => {
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { user } = useAuth(); // Changed from currentUser to user to match your AuthContext
+    const { user } = useAuth(); // assuming user object contains company info
 
     useEffect(() => {
         const fetchApplications = async () => {
@@ -16,8 +16,8 @@ const CompanyApplications = () => {
                     setApplications(data);
                 }
             } catch (err) {
+                console.error('Error fetching applications:', err);
                 setError('Failed to load applications. Please try again later.');
-                console.error(err);
             } finally {
                 setLoading(false);
             }
@@ -29,19 +29,24 @@ const CompanyApplications = () => {
     const handleStatusUpdate = async (applicationId, newStatus) => {
         try {
             await updateApplicationStatus(applicationId, newStatus);
-
-            // Update the local state to reflect the change
-            setApplications(applications.map(app =>
-                app.id === applicationId ? { ...app, status: newStatus } : app
-            ));
+            setApplications(prevApps =>
+                prevApps.map(app =>
+                    app.id === applicationId ? { ...app, status: newStatus } : app
+                )
+            );
         } catch (err) {
-            setError('Failed to update application status. Please try again.');
-            console.error(err);
+            console.error('Error updating status:', err);
+            setError('Failed to update application status.');
         }
     };
 
-    if (loading) return <div className="text-center py-4">Loading applications...</div>;
-    if (error) return <div className="text-center py-4 text-red-500">{error}</div>;
+    if (loading) {
+        return <div className="text-center py-6">Loading applications...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center py-6 text-red-500">{error}</div>;
+    }
 
     return (
         <div className="container mx-auto px-4 py-6">
@@ -65,11 +70,13 @@ const CompanyApplications = () => {
                             {applications.map(application => (
                                 <tr key={application.id} className="hover:bg-gray-50">
                                     <td className="py-3 px-4 border-b">
-                                        {application.user.firstName} {application.user.lastName}
+                                        {application.user?.firstName} {application.user?.lastName}
                                     </td>
-                                    <td className="py-3 px-4 border-b">{application.job.title}</td>
                                     <td className="py-3 px-4 border-b">
-                                        {new Date(application.appliedDate).toLocaleDateString()}
+                                        {application.job?.title}
+                                    </td>
+                                    <td className="py-3 px-4 border-b">
+                                        {application.appliedDate ? new Date(application.appliedDate).toLocaleDateString() : '-'}
                                     </td>
                                     <td className="py-3 px-4 border-b">
                                         <span className={`px-2 py-1 rounded text-sm ${application.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
@@ -80,7 +87,7 @@ const CompanyApplications = () => {
                                         </span>
                                     </td>
                                     <td className="py-3 px-4 border-b">
-                                        {application.status === 'PENDING' && (
+                                        {application.status === 'PENDING' ? (
                                             <div className="flex space-x-2">
                                                 <button
                                                     onClick={() => handleStatusUpdate(application.id, 'CONFIRMED')}
@@ -95,8 +102,7 @@ const CompanyApplications = () => {
                                                     Reject
                                                 </button>
                                             </div>
-                                        )}
-                                        {application.status !== 'PENDING' && (
+                                        ) : (
                                             <span className="text-gray-500">Processed</span>
                                         )}
                                     </td>

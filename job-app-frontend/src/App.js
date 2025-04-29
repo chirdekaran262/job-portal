@@ -14,6 +14,7 @@ import UserApplications from './components/UserApplications';
 import CompanyApplications from './components/CompanyApplications';
 import ProtectedRoute from './components/ProtectedRoute';
 import './styles/main.css';
+import CompanyList from './components/CompanyList'; // <-- import at top
 
 function App() {
   return (
@@ -26,10 +27,9 @@ function App() {
               {/* Public routes */}
               <Route path="/" element={<JobList />} />
               <Route path="/jobs/:id" element={<JobDetails />} />
-              {/* <Route path="/companies/:id" element={<CompanyDetails />} /> */}
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-
+              <Route path="/companies" element={<CompanyList />} />
               {/* Protected routes - Job seeker */}
               {/* <Route path="/jobs/:jobId/apply" element={
                 <ProtectedRoute requiredRole="ROLE_USER">

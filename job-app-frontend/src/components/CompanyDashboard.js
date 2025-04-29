@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getCompanyJobs, deleteJob } from '../services/jobService'; // Import deleteJob function
 import { useNavigate } from 'react-router-dom';
 import './CompanyDashboard.css'; // Add a CSS file for styling
-
+import CompanyApplications from './CompanyApplications'; // Import the CompanyApplications component
 const CompanyDashboard = () => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -83,6 +83,7 @@ const CompanyDashboard = () => {
                     ))}
                 </div>
             )}
+            <CompanyApplications />
         </div>
     );
 };

@@ -45,6 +45,7 @@ const JobDetails = () => {
         try {
             const coverLetter = prompt('Enter your cover letter (optional):', '');
             const resumeUrl = prompt('Enter your resume URL (optional):', '');
+            console.log("Application ", id, user.id, coverLetter, resumeUrl)
             await applyForJob(id, user.id, coverLetter, resumeUrl);
             setApplyStatus('Application submitted successfully!');
         } catch (err) {

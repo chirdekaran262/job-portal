@@ -56,14 +56,14 @@ export const getUserApplications = async (userId) => {
     }
 };
 
-export const getCompanyApplications = async (companyId) => {
+export const getCompanyApplications = async () => {
     try {
         const token = getToken();
         if (!token) {
             throw new Error('Authentication required');
         }
 
-        const response = await fetch(`/company/${companyId}/pending`, {
+        const response = await fetch(`/applications/company`, {  // <-- fix here
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -77,28 +77,6 @@ export const getCompanyApplications = async (companyId) => {
         return await response.json();
     } catch (error) {
         console.error('Error fetching applications:', error);
-        throw error;
-    }
-};
-export const getPendingApplications = async (companyId) => {
-    try {
-        const token = getToken();
-        if (!token) {
-            throw new Error('Authentication required');
-        }
-
-        const response = await axios.get(
-            `${API_URL}/applications/company/${companyId}/pending`,
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }
-        );
-
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching pending applications:', error);
         throw error;
     }
 };
