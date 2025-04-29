@@ -11,10 +11,9 @@ const CompanyApplications = () => {
     useEffect(() => {
         const fetchApplications = async () => {
             try {
-                if (user?.company?.id) {
-                    const data = await getCompanyApplications(user.company.id);
-                    setApplications(data);
-                }
+                const data = await getCompanyApplications();
+                setApplications(data);
+                console.log('Fetched applications:', data); // Debugging line
             } catch (err) {
                 console.error('Error fetching applications:', err);
                 setError('Failed to load applications. Please try again later.');
@@ -60,6 +59,8 @@ const CompanyApplications = () => {
                         <thead className="bg-gray-100">
                             <tr>
                                 <th className="py-3 px-4 border-b text-left">Applicant</th>
+                                <th className="py-3 px-4 border-b text-left">Email</th>
+                                <th className="py-3 px-4 border-b text-left">Phone</th>
                                 <th className="py-3 px-4 border-b text-left">Job Title</th>
                                 <th className="py-3 px-4 border-b text-left">Applied On</th>
                                 <th className="py-3 px-4 border-b text-left">Status</th>
@@ -70,18 +71,24 @@ const CompanyApplications = () => {
                             {applications.map(application => (
                                 <tr key={application.id} className="hover:bg-gray-50">
                                     <td className="py-3 px-4 border-b">
-                                        {application.user?.firstName} {application.user?.lastName}
+                                        {application.user?.fullName || 'N/A'}
                                     </td>
                                     <td className="py-3 px-4 border-b">
-                                        {application.job?.title}
+                                        {application.user?.email || 'N/A'}
+                                    </td>
+                                    <td className="py-3 px-4 border-b">
+                                        {application.user?.phoneNumber || 'N/A'}
+                                    </td>
+                                    <td className="py-3 px-4 border-b">
+                                        {application.job?.title || 'N/A'}
                                     </td>
                                     <td className="py-3 px-4 border-b">
                                         {application.appliedDate ? new Date(application.appliedDate).toLocaleDateString() : '-'}
                                     </td>
                                     <td className="py-3 px-4 border-b">
                                         <span className={`px-2 py-1 rounded text-sm ${application.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
-                                                application.status === 'CONFIRMED' ? 'bg-green-100 text-green-800' :
-                                                    'bg-red-100 text-red-800'
+                                            application.status === 'CONFIRMED' ? 'bg-green-100 text-green-800' :
+                                                'bg-red-100 text-red-800'
                                             }`}>
                                             {application.status}
                                         </span>

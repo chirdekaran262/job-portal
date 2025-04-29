@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { getCompanyJobs, deleteJob } from '../services/jobService'; // Import deleteJob function
-import { useNavigate } from 'react-router-dom';
-import './CompanyDashboard.css'; // Add a CSS file for styling
-import CompanyApplications from './CompanyApplications'; // Import the CompanyApplications component
+import { getCompanyJobs, deleteJob } from '../services/jobService';
+import { useNavigate, useLocation } from 'react-router-dom'; // added useLocation
+import './CompanyDashboard.css';
+import CompanyApplications from './CompanyApplications';
+
 const CompanyDashboard = () => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation(); // watch for route changes
+
+    const fetchJobs = async () => {
+        try {
+            setLoading(true);
+            const companyJobs = await getCompanyJobs();
+            setJobs(companyJobs);
+            setError(null);
+        } catch (error) {
+            console.error('Failed to fetch jobs:', error);
+            setError('Failed to load jobs. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchJobs = async () => {
-            try {
-                const companyJobs = await getCompanyJobs();
-                setJobs(companyJobs);
-            } catch (error) {
-                console.error('Failed to fetch jobs:', error);
-                setError('Failed to load jobs. Please try again later.');
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchJobs();
-    }, []);
+    }, [location]); // trigger fetch when navigating back
 
     const handleDelete = async (jobId) => {
         if (window.confirm('Are you sure you want to delete this job?')) {
@@ -39,7 +43,7 @@ const CompanyDashboard = () => {
     };
 
     const handleUpdate = (jobId) => {
-        navigate(`/edit/${jobId}`); // Navigate to the job edit page
+        navigate(`/edit/${jobId}`); // Go to edit page
     };
 
     if (loading) {
