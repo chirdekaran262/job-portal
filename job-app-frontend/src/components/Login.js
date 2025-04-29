@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { loginUser } from '../services/authService';
 import { AuthContext } from '../context/AuthContext';
-import '../styles/components.css';
+import '../styles/farm-theme.css';
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -45,9 +45,10 @@ const Login = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container farm-background">
             <div className="form-container">
-                <h2>Login</h2>
+                <h2>Welcome Back to FarmConnect</h2>
+                <p className="form-subtitle">Log in to find farm jobs or hire agricultural workers</p>
 
                 {error && (
                     <div className="error-message">
@@ -55,29 +56,44 @@ const Login = () => {
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="farm-form">
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={credentials.username}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div className="input-icon-wrapper">
+                            <span className="input-icon">👤</span>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                value={credentials.username}
+                                onChange={handleChange}
+                                placeholder="Enter your username"
+                                required
+                            />
+                        </div>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={credentials.password}
-                            onChange={handleChange}
-                            required
-                        />
+                        <div className="input-icon-wrapper">
+                            <span className="input-icon">🔒</span>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={credentials.password}
+                                onChange={handleChange}
+                                placeholder="Enter your password"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className="remember-me">
+                        <label>
+                            <input type="checkbox" /> Remember me
+                        </label>
+                        <a href="#" className="forgot-password">Forgot Password?</a>
                     </div>
 
                     <div className="button-group">
@@ -86,15 +102,21 @@ const Login = () => {
                             className={`btn btn-primary ${loading ? 'btn-disabled' : ''}`}
                             disabled={loading}
                         >
-                            {loading ? 'Logging in...' : 'Login'}
+                            {loading ? 'Logging in...' : 'Login to FarmConnect'}
                         </button>
                     </div>
                 </form>
 
                 <div className="form-footer">
                     <p>
-                        Don't have an account? <Link to="/register">Register here</Link>
+                        Don't have an account? <Link to="/register">Register as a Farm Worker or Farm Owner</Link>
                     </p>
+                </div>
+
+                <div className="farm-theme-footer">
+                    <div className="farm-icon tractor"></div>
+                    <div className="farm-icon wheat"></div>
+                    <div className="farm-icon sun"></div>
                 </div>
             </div>
         </div>

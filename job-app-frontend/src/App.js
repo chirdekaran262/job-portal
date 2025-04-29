@@ -15,6 +15,7 @@ import CompanyApplications from './components/CompanyApplications';
 import ProtectedRoute from './components/ProtectedRoute';
 import './styles/main.css';
 import CompanyList from './components/CompanyList'; // <-- import at top
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                   <UserApplications />
                 </ProtectedRoute>
               } />
+              <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
 
               {/* Protected routes - Company */}
               <Route path="/add" element={

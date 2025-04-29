@@ -1,22 +1,24 @@
+// CompanyApplications.jsx
 import React, { useState, useEffect } from 'react';
 import { getCompanyApplications, updateApplicationStatus } from '../services/jobApplicationService';
-import { useAuth } from '../context/AuthContext'; // make sure correct path
+import { useAuth } from '../context/AuthContext';
+// import '../styles/FarmTheme.css'; // We'll create this custom CSS file
 
 const CompanyApplications = () => {
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { user } = useAuth(); // assuming user object contains company info
+    const { user } = useAuth();
 
     useEffect(() => {
         const fetchApplications = async () => {
             try {
                 const data = await getCompanyApplications();
                 setApplications(data);
-                console.log('Fetched applications:', data); // Debugging line
+                console.log('Fetched applications:', data);
             } catch (err) {
                 console.error('Error fetching applications:', err);
-                setError('Failed to load applications. Please try again later.');
+                setError('Failed to gather applications. Please try again later.');
             } finally {
                 setLoading(false);
             }
@@ -33,84 +35,94 @@ const CompanyApplications = () => {
                     app.id === applicationId ? { ...app, status: newStatus } : app
                 )
             );
+
+            // Show farm-themed confirmation
+            if (newStatus === 'CONFIRMED') {
+                alert('Hand hired for the harvest! They\'ve been notified.');
+            } else if (newStatus === 'REJECTED') {
+                alert('Applicant notified that position has been filled.');
+            }
         } catch (err) {
             console.error('Error updating status:', err);
-            setError('Failed to update application status.');
+            setError('Failed to update worker status.');
         }
     };
 
     if (loading) {
-        return <div className="text-center py-6">Loading applications...</div>;
+        return <div className="harvest-loading">Gathering applications from the field...</div>;
     }
 
     if (error) {
-        return <div className="text-center py-6 text-red-500">{error}</div>;
+        return <div className="harvest-error">{error}</div>;
     }
 
     return (
-        <div className="container mx-auto px-4 py-6">
-            <h1 className="text-2xl font-bold mb-6">Job Applications</h1>
-
+        <div className="harvest-container">
             {applications.length === 0 ? (
-                <p className="text-gray-500">No applications received yet.</p>
+                <div className="empty-harvest">
+                    <div className="empty-harvest-icon"></div>
+                    <p>No hands have applied yet. The harvest awaits workers!</p>
+                </div>
             ) : (
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white border border-gray-200">
-                        <thead className="bg-gray-100">
+                <div className="harvest-table-container">
+                    <table className="harvest-table">
+                        <thead>
                             <tr>
-                                <th className="py-3 px-4 border-b text-left">Applicant</th>
-                                <th className="py-3 px-4 border-b text-left">Email</th>
-                                <th className="py-3 px-4 border-b text-left">Phone</th>
-                                <th className="py-3 px-4 border-b text-left">Job Title</th>
-                                <th className="py-3 px-4 border-b text-left">Applied On</th>
-                                <th className="py-3 px-4 border-b text-left">Status</th>
-                                <th className="py-3 px-4 border-b text-left">Actions</th>
+                                <th>Farm Hand</th>
+                                <th>Contact (Email)</th>
+                                <th>Phone</th>
+                                <th>Position</th>
+                                <th>Applied On</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {applications.map(application => (
-                                <tr key={application.id} className="hover:bg-gray-50">
-                                    <td className="py-3 px-4 border-b">
-                                        {application.user?.fullName || 'N/A'}
+                                <tr key={application.id}>
+                                    <td>
+                                        <div className="farmhand-name">
+                                            <span className="worker-icon"></span>
+                                            {application.user?.fullName || 'N/A'}
+                                        </div>
                                     </td>
-                                    <td className="py-3 px-4 border-b">
+                                    <td>
                                         {application.user?.email || 'N/A'}
                                     </td>
-                                    <td className="py-3 px-4 border-b">
+                                    <td>
                                         {application.user?.phoneNumber || 'N/A'}
                                     </td>
-                                    <td className="py-3 px-4 border-b">
+                                    <td>
                                         {application.job?.title || 'N/A'}
                                     </td>
-                                    <td className="py-3 px-4 border-b">
+                                    <td>
                                         {application.appliedDate ? new Date(application.appliedDate).toLocaleDateString() : '-'}
                                     </td>
-                                    <td className="py-3 px-4 border-b">
-                                        <span className={`px-2 py-1 rounded text-sm ${application.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
-                                            application.status === 'CONFIRMED' ? 'bg-green-100 text-green-800' :
-                                                'bg-red-100 text-red-800'
-                                            }`}>
-                                            {application.status}
+                                    <td>
+                                        <span className={`status-badge ${application.status.toLowerCase()}`}>
+                                            {application.status === 'PENDING' ? 'Pending' :
+                                                application.status === 'CONFIRMED' ? 'Hired' :
+                                                    'Not Selected'}
                                         </span>
                                     </td>
-                                    <td className="py-3 px-4 border-b">
+                                    <td>
                                         {application.status === 'PENDING' ? (
-                                            <div className="flex space-x-2">
+                                            <div className="action-buttons">
                                                 <button
                                                     onClick={() => handleStatusUpdate(application.id, 'CONFIRMED')}
-                                                    className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                                                    className="hire-button"
                                                 >
-                                                    Accept
+                                                    Hire
                                                 </button>
                                                 <button
                                                     onClick={() => handleStatusUpdate(application.id, 'REJECTED')}
-                                                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                                                    className="pass-button"
                                                 >
-                                                    Reject
+                                                    Pass
                                                 </button>
                                             </div>
                                         ) : (
-                                            <span className="text-gray-500">Processed</span>
+                                            <span className="processed-label">Processed</span>
                                         )}
                                     </td>
                                 </tr>
