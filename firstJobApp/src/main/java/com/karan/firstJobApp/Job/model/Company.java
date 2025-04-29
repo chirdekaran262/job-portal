@@ -1,6 +1,7 @@
 package com.karan.firstJobApp.Job.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review>  reviews;
 
     public Company() {

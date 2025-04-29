@@ -1,5 +1,6 @@
 package com.karan.firstJobApp.Job.service.Impl;
 
+import com.karan.firstJobApp.Job.model.Company;
 import com.karan.firstJobApp.Job.model.Job;
 import com.karan.firstJobApp.Job.repo.JobRepo;
 import com.karan.firstJobApp.Job.service.JobService;
@@ -35,6 +36,8 @@ public class JobServiceImpl implements JobService {
         return jobRepo.findById(id).get();
     }
 
+
+
     @Override
     public boolean deleteJob(Long id) {
         Job job=jobRepo.findById(id).get();
@@ -46,7 +49,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public boolean updateJob(Long id,Job job) {
+    public boolean updateJob(Long id, Job job, Company company) {
         Optional<Job> job1 =jobRepo.findById(id);
         if(job1.isPresent()){
             Job job2=job1.get();
@@ -55,10 +58,15 @@ public class JobServiceImpl implements JobService {
             job2.setLocation(job.getLocation());
             job2.setMinSalary(job.getMinSalary());
             job2.setMaxSalary(job.getMaxSalary());
-            job2.setCompany(job.getCompany());
+            job2.setCompany(company);
             jobRepo.save(job2);
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Job> findbyCompanyId(Long id) {
+        return jobRepo.findByCompanyId(id);
     }
 }

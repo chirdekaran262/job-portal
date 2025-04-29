@@ -1,5 +1,6 @@
 package com.karan.firstJobApp.Job.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -14,8 +15,9 @@ public class Review {
     private String description;
     private double rating;
 
-    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "company_id")
+    @JsonBackReference
     private Company company;
 
     public Review() {

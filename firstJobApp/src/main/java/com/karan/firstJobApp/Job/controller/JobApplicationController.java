@@ -1,5 +1,6 @@
 package com.karan.firstJobApp.Job.controller;
 
+import com.karan.firstJobApp.Job.model.Company;
 import com.karan.firstJobApp.Job.model.JobApplication;
 import com.karan.firstJobApp.Job.model.Users;
 import com.karan.firstJobApp.Job.repo.UserRepository;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/applications")
+@CrossOrigin(origins = "http://localhost:3000/*")
 public class JobApplicationController {
 
     @Autowired
@@ -25,7 +27,14 @@ public class JobApplicationController {
     private UserRepository userRepo;
 
     @GetMapping
-    public ResponseEntity<List<JobApplication>> getAllApplications() {
+    public ResponseEntity<List<JobApplication>> getAllApplications(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+        Company company = currentUser.getCompany();
+
         List<JobApplication> applications = jobApplicationService.getAllApplications();
         return new ResponseEntity<>(applications, HttpStatus.OK);
     }
@@ -38,14 +47,18 @@ public class JobApplicationController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
     @PostMapping("/apply")
     public ResponseEntity<String> applyForJob(
             @RequestParam Long jobId,
             @RequestParam Long userId,
             @RequestParam(required = false) String coverLetter,
             @RequestParam(required = false) String resumeUrl) {
-
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+//        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+//            return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
+//        }
+        System.out.println(jobId);
         boolean applied = jobApplicationService.applyForJob(jobId, userId, coverLetter, resumeUrl);
         if (applied) {
             return new ResponseEntity<>("Application submitted successfully", HttpStatus.CREATED);
@@ -65,15 +78,29 @@ public class JobApplicationController {
         return new ResponseEntity<>(applications, HttpStatus.OK);
     }
 
-    @GetMapping("/company/{companyId}")
-    public ResponseEntity<List<JobApplication>> getApplicationsByCompany(@PathVariable Long companyId) {
-        List<JobApplication> applications = jobApplicationService.getApplicationsByCompanyId(companyId);
+    @GetMapping("/company")
+    public ResponseEntity<List<JobApplication>> getApplicationsByCompany(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+        Company company = currentUser.getCompany();
+
+        List<JobApplication> applications = jobApplicationService.getApplicationsByCompanyId(company.getId());
         return new ResponseEntity<>(applications, HttpStatus.OK);
     }
 
-    @GetMapping("/company/{companyId}/pending")
-    public ResponseEntity<List<JobApplication>> getPendingApplicationsByCompany(@PathVariable Long companyId) {
-        List<JobApplication> applications = jobApplicationService.getApplicationsByCompanyId(companyId)
+    @GetMapping("/company/pending")
+    public ResponseEntity<List<JobApplication>> getPendingApplicationsByCompany(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+        Company company = currentUser.getCompany();
+
+        List<JobApplication> applications = jobApplicationService.getApplicationsByCompanyId(company.getId())
                 .stream()
                 .filter(app -> "PENDING".equals(app.getStatus()))
                 .toList();

@@ -14,10 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:3000/*")
 public class AuthController {
 
     @Autowired
@@ -66,7 +64,7 @@ public class AuthController {
             if (users.getRole() == null || users.getRole().isEmpty()) {
                 users.setRole("ROLE_USER");
             }
-            if ("ROLE_COMPANY".equals(users.getRole())) {
+            else if ("ROLE_COMPANY".equals(users.getRole())) {
                 Company company = new Company();
                 company.setName(users.getFullName()); // Set initial name from user's full name
                 company.setDescription(""); // Empty description initially

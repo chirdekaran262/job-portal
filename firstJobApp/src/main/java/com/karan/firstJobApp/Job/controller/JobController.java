@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/jobs")
+@CrossOrigin("http://localhost:3000/*")
 public class JobController {
 
     @Autowired
@@ -30,28 +31,56 @@ public class JobController {
 
     @PostMapping
     public ResponseEntity<String> AddJob(@RequestBody Job job, Authentication authentication) {
-        // Get the currently authenticated user
+        try {
+            // Get the currently authenticated user
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+
+            // Check if user exists
+            if (currentUser == null) {
+                return new ResponseEntity<>("User not found", HttpStatus.FORBIDDEN);
+            }
+
+            // Check if user has ROLE_COMPANY
+            if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+                return new ResponseEntity<>("Only companies can post jobs. Current role: " + currentUser.getRole(), HttpStatus.FORBIDDEN);
+            }
+
+            // Get the company associated with this user
+            Company company = currentUser.getCompany();
+
+            if (company == null) {
+                return new ResponseEntity<>("User doesn't have an associated company", HttpStatus.BAD_REQUEST);
+            }
+
+            // Set the company for this job
+            job.setCompany(company);
+
+            // Add the job
+            jobService.addJob(job);
+            return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //Find job By the company
+    @GetMapping("/company")
+    public ResponseEntity<List<Job>> findAllJobByCompany(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Users currentUser = userRepo.findByUsername(userDetails.getUsername());
-
-        // Check if user has ROLE_COMPANY
         if (!currentUser.getRole().equals("ROLE_COMPANY")) {
-            return new ResponseEntity<>("Only companies can post jobs", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
         }
-
-        // Get the company associated with this user
         Company company = currentUser.getCompany();
-
         if (company == null) {
-            return new ResponseEntity<>("User doesn't have an associated company", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-
-        // Set the company for this job
-        job.setCompany(company);
-
-        // Add the job
-        jobService.addJob(job);
-        return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
+        List<Job> job=jobService.findbyCompanyId(company.getId());
+        if (job == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(job,HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -64,7 +93,19 @@ public class JobController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteJob(@PathVariable Long id){
+    public ResponseEntity<String> deleteJob(@PathVariable Long id,Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+            return new ResponseEntity<>("Only companies can delete jobs", HttpStatus.FORBIDDEN);
+        }
+        Company company = currentUser.getCompany();
+        if (company == null) {
+            return new ResponseEntity<>("User doesn't have an associated company", HttpStatus.BAD_REQUEST);
+        }
+        if(!jobService.findbyId(id).getCompany().getId().equals(company.getId())){
+            return new ResponseEntity<>("Only companies can delete jobs", HttpStatus.FORBIDDEN);
+        }
         boolean job=jobService.deleteJob(id);
         if(job){
             return new ResponseEntity<>("Job deleted", HttpStatus.OK);
@@ -73,8 +114,20 @@ public class JobController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateJob(@PathVariable Long id,@RequestBody Job job){
-        boolean job1=jobService.updateJob(id,job);
+    public ResponseEntity<String> updateJob(@PathVariable Long id,@RequestBody Job job,Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
+        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
+            return new ResponseEntity<>("Only companies can update jobs", HttpStatus.FORBIDDEN);
+        }
+        Company company = currentUser.getCompany();
+        if (company == null) {
+            return new ResponseEntity<>("User doesn't have an associated company", HttpStatus.BAD_REQUEST);
+        }
+        if(!jobService.findbyId(id).getCompany().getId().equals(company.getId())){
+            return new ResponseEntity<>("Only companies can update jobs", HttpStatus.FORBIDDEN);
+        }
+        boolean job1=jobService.updateJob(id,job,company);
         if(job1){
             return new ResponseEntity<>("Job updated", HttpStatus.OK);
         }
