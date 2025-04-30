@@ -632,3 +632,42 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Delete Button */
+.delete-button {
+    background-color: var(--danger);
+    /* Red color for delete action */
+    color: white;
+    font-weight: 600;
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+    /* Darker red for hover */
+    transform: translateY(-2px);
+    /* Slight lift effect */
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+    /* Glow effect */
+}
+
+.delete-button:active {
+    transform: translateY(0);
+    /* Reset lift effect */
+    box-shadow: var(--shadow-sm);
+    /* Reset shadow */
+}
+
+.delete-button::before {
+    content: '🗑️';
+    /* Trash icon */
+    font-size: 1rem;
+}

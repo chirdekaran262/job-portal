@@ -50,6 +50,18 @@ const CompanyApplications = () => {
         }
     };
 
+    const handleDeleteApplication = async (applicationId) => {
+        try {
+            await updateApplicationStatus(applicationId, 'REJECTED'); // Assuming 'REJECTED' is the status for deletion
+            setApplications(prevApps => prevApps.filter(app => app.id !== applicationId));
+            alert('Application deleted successfully.');
+        }
+        catch (err) {
+            console.error('Error deleting application:', err);
+            setError('Failed to delete application.');
+        }
+    };
+
     const handleViewDetails = async (applicationId) => {
         try {
             // If we already have all the data in the applications array, we can just use that
@@ -141,6 +153,16 @@ const CompanyApplications = () => {
                                                     </button>
                                                 </>
                                             )}
+                                            {
+                                                application.status === 'CONFIRMED' && (
+                                                    <button
+                                                        onClick={() => handleDeleteApplication(application.id)}
+                                                        className="delete-button"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                )
+                                            }
                                         </div>
                                     </td>
                                 </tr>
