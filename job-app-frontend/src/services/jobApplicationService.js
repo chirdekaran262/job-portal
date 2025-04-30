@@ -3,7 +3,7 @@ import { getToken } from './authService';
 
 const API_URL = 'http://localhost:8081';
 
-export const applyForJob = async (jobId, userId, coverLetter = '', resumeUrl = '') => {
+export const applyForJob = async (jobId, userId, coverLetter = '', resumeUrl = '', experience = '') => {
     try {
         const token = getToken();
         if (!token) {
@@ -16,7 +16,8 @@ export const applyForJob = async (jobId, userId, coverLetter = '', resumeUrl = '
                 jobId,
                 userId,
                 coverLetter,
-                resumeUrl
+                resumeUrl,
+                experience
             },
             {
                 headers: {
@@ -33,8 +34,6 @@ export const applyForJob = async (jobId, userId, coverLetter = '', resumeUrl = '
     }
 };
 
-
-
 export const getUserApplications = async (userId) => {
     try {
         const token = getToken();
@@ -42,7 +41,7 @@ export const getUserApplications = async (userId) => {
             throw new Error('Authentication required');
         }
 
-        const response = await axios.get(`http://localhost:8081/applications/users/${userId}`, {
+        const response = await axios.get(`${API_URL}/applications/users/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -63,20 +62,38 @@ export const getCompanyApplications = async () => {
             throw new Error('Authentication required');
         }
 
-        const response = await fetch(`/applications/company`, {  // <-- fix here
+        // Fixed the API URL to use the API_URL constant
+        const response = await axios.get(`${API_URL}/applications/company`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch applications');
-        }
-
-        return await response.json();
+        return response.data;
     } catch (error) {
         console.error('Error fetching applications:', error);
+        throw error;
+    }
+};
+
+export const getApplicationDetails = async (applicationId) => {
+    try {
+        const token = getToken();
+        if (!token) {
+            throw new Error('Authentication required');
+        }
+
+        const response = await axios.get(`${API_URL}/applications/${applicationId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching application details:', error);
         throw error;
     }
 };
