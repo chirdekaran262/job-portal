@@ -24,14 +24,26 @@
     --farm-gray-900: #212529;
 }
 
-/* Modern Header Styles */
 .header {
     background-color: var(--farm-green-600);
+    /* Fallback color */
+    background-image: url('../images/wheat.jpg');
+    /* Replace with your image path */
+    background-size: cover;
+    /* Ensures the image covers the entire header */
+    background-position: bottom;
+    /* Focuses on the bottom center of the image */
+    background-repeat: no-repeat;
+    /* Prevents the image from repeating */
+    background-attachment: fixed;
+    /* Keeps the image fixed during scrolling */
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 1.3rem 1rem;
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 100px;
+    /* Adjust the height as needed */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
 }

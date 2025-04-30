@@ -60,7 +60,7 @@ const Login = () => {
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <div className="input-icon-wrapper">
-                            <span className="input-icon">👤</span>
+                            <span className="input-icon input-icon-user"></span>
                             <input
                                 type="text"
                                 id="username"
@@ -76,7 +76,7 @@ const Login = () => {
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <div className="input-icon-wrapper">
-                            <span className="input-icon">🔒</span>
+                            <span className="input-icon input-icon-lock"></span>
                             <input
                                 type="password"
                                 id="password"

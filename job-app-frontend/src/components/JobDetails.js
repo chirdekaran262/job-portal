@@ -20,7 +20,6 @@ const JobDetails = () => {
         coverLetter: "",
         resumeUrl: "",
         experience: "",
-        startDate: "",
     })
 
     useEffect(() => {
@@ -63,7 +62,8 @@ const JobDetails = () => {
         }
 
         try {
-            await applyForJob(id, user.id, application.coverLetter, application.resumeUrl)
+            await applyForJob(id, user.id, application.experience, application.coverLetter, application.resumeUrl)
+            console.log("Application submitted successfully")
             setApplyStatus("Your farm job application was submitted successfully!")
             setShowApplyForm(false)
         } catch (err) {
@@ -283,7 +283,7 @@ const JobDetails = () => {
                         <div className="farm-company-card">
                             <div className="farm-company-header">
                                 <div className="farm-company-logo">
-                                    <img src={job.company?.logo || "/placeholder.svg"} alt={job.company?.name || "Farm logo"} />
+                                    <img src={job.company?.logo} alt={job.company?.name || "Farm logo"} />
                                 </div>
                                 <div>
                                     <h3>{job.company?.name || "Farm Information"}</h3>

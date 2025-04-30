@@ -109,15 +109,38 @@ button:hover {
     margin: 0 auto;
 }
 
-.farm-header {
+/* .farm-header {
     background-color: #4a7c59;
-    /* Farm green */
+     
     color: #fff;
     padding: 20px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+} */
+.header {
+    background-color: var(--farm-green-600);
+    /* Fallback color */
+    background-image: url('../images/wheat.jpg');
+    /* Replace with your image path */
+    background-size: cover;
+    /* Ensures the image covers the entire header */
+    background-position: center bottom;
+    /* Focuses on the bottom center of the image */
+    background-repeat: no-repeat;
+    /* Prevents the image from repeating */
+    background-attachment: fixed;
+    /* Keeps the image fixed during scrolling */
+    color: white;
+    padding: 1.3rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 100px;
+    /* Adjust the height as needed */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
 }
 
 .farm-header h1 {
