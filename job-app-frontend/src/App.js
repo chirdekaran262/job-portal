@@ -16,7 +16,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import './styles/main.css';
 import CompanyList from './components/CompanyList'; // <-- import at top
 import UserProfile from './components/UserProfile';
-
+import OpenToWorkPost from './components/OpenToWorkPost';
+import OpenToWork from './components/OpenToWork'; // <-- import at top
+import OpenToWorkSuccess from './components/OpenToWorkSuccess'; // <-- import at top
 function App() {
   return (
     <AuthProvider>
@@ -65,7 +67,13 @@ function App() {
                   <CompanyApplications />
                 </ProtectedRoute>
               } />
+              <Route path="/opentowork/*" element={
+                <ProtectedRoute requiredRole="ROLE_USER">
+                  <OpenToWork />
+                </ProtectedRoute>
+              } />
             </Routes>
+
           </main>
         </div>
       </Router>

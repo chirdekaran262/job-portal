@@ -1,6 +1,5 @@
 // src/components/JobList.js
 import React, { useState, useEffect } from 'react';
-import { getAllJobs } from '../services/jobService';
 import { Link } from 'react-router-dom';
 import '../styles/farm-theme.css';
 import '../styles/job-list.css'; // Import the isolated CSS
@@ -13,12 +12,26 @@ const JobList = () => {
         jobType: '',
         location: ''
     });
-
+    const [company, setCompany] = useState([]);
+    // State for location input
     const fetchJobs = async () => {
         try {
-            setLoading(true);
-            const data = await getAllJobs();
+            // setLoading(true);
+            let url = '/jobs'; // Base URL for jobs
+
+            // Check if location filter is applied
+            if (filters.location) {
+                url = `/jobs/location?location=${encodeURIComponent(filters.location)}`;
+            }
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Failed to fetch jobs');
+            }
+
+            const data = await response.json();
             setJobs(data);
+
             setError(null);
         } catch (err) {
             setError('Failed to fetch farm jobs. Please try again later.');
@@ -29,7 +42,7 @@ const JobList = () => {
 
     useEffect(() => {
         fetchJobs();
-    }, []);
+    }, [filters.location]); // Refetch jobs when the location filter changes
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
@@ -112,7 +125,7 @@ const JobList = () => {
                                 ${job.minSalary} - ${job.maxSalary}
                             </p>
                             <p className="farm-job-company">
-                                {job.company?.name || 'Farm name not available'}
+                                {job.company.name || 'Farm name not available'}
                             </p>
                             <div className="farm-job-actions">
                                 <Link to={`/jobs/${job.id}`} className="farm-btn farm-btn-info">

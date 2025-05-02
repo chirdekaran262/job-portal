@@ -69,7 +69,9 @@ export const loginUser = async (credentials) => {
 // Get token from cookies
 export const getToken = () => {
     const token = Cookies.get('token');
-    console.log('Token (from getToken):', token);
+    if (!token) {
+        console.warn('No token found in cookies!');
+    }
     return token;
 };
 

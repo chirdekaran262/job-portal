@@ -114,18 +114,31 @@ const Header = () => {
 
                         {user ? (
                             <>
-                                {/* Links for ROLE_USER */}
                                 {user.role === "ROLE_USER" && (
-                                    <li className="nav-item">
-                                        <Link to="/applications" className={`nav-link ${isActive('/applications') ? 'active' : ''}`}>
-                                            <span className="link-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                                </svg>
-                                            </span>
-                                            Applications
-                                        </Link>
-                                    </li>
+                                    <>
+                                        <li className="nav-item">
+                                            <Link to="/applications" className={`nav-link ${isActive('/applications') ? 'active' : ''}`}>
+                                                <span className="link-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                                    </svg>
+                                                </span>
+                                                Applications
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/opentowork/create" className={`nav-link ${isActive('/opentowork/create') ? 'active' : ''}`}>
+                                                <span className="link-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <circle cx="12" cy="12" r="10" />
+                                                        <line x1="12" y1="8" x2="12" y2="16" />
+                                                        <line x1="8" y1="12" x2="16" y2="12" />
+                                                    </svg>
+                                                </span>
+                                                Post OpenToWork
+                                            </Link>
+                                        </li>
+                                    </>
                                 )}
 
                                 {/* Links for ROLE_COMPANY */}
@@ -153,7 +166,7 @@ const Header = () => {
                                                         <path d="M9 14l2 2 4-4" />
                                                     </svg>
                                                 </span>
-                                                Apps
+                                                JobSeeker
                                             </Link>
                                         </li>
                                         <li className="nav-item">
