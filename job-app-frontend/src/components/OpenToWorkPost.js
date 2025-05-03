@@ -189,9 +189,10 @@ const OpenToWorkPost = () => {
     return (
         <div className="opentowork-container">
             <div className="opentowork-banner">
-                {/* <img src="/farm-banner.png" alt="Farm Banner" className="banner-img" /> */}
                 <h1 className="banner-title">Let Farms Find You!</h1>
-                <p className="banner-desc">Share your skills and availability. Connect with local farms looking for hands like yours.</p>
+                <p className="banner-desc">
+                    Share your skills and availability. Connect with local farms looking for hands like yours.
+                </p>
             </div>
 
             {/* Show OpenToWork Status only on the main page, not in create/update mode */}

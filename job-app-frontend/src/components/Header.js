@@ -127,7 +127,7 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="/opentowork/create" className={`nav-link ${isActive('/opentowork/create') ? 'active' : ''}`}>
+                                            <Link to="/opentowork" className={`nav-link ${isActive('/opentowork/create') ? 'active' : ''}`}>
                                                 <span className="link-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                         <circle cx="12" cy="12" r="10" />
@@ -158,15 +158,16 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="/company/applications" className={`nav-link ${isActive('/company/applications') ? 'active' : ''}`}>
+                                            <Link to="/company/jobseekers" className={`nav-link ${isActive('/company/jobseekers') ? 'active' : ''}`}>
                                                 <span className="link-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                                        <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2" />
-                                                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-                                                        <path d="M9 14l2 2 4-4" />
+                                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                                        <circle cx="9" cy="7" r="4"></circle>
+                                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                                     </svg>
                                                 </span>
-                                                JobSeeker
+                                                Find Workers
                                             </Link>
                                         </li>
                                         <li className="nav-item">

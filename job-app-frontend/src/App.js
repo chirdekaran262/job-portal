@@ -5,6 +5,7 @@ import Header from './components/Header';
 import JobList from './components/JobList';
 import JobDetails from './components/JobDetails';
 import JobForm from './components/JobForm';
+import OpenToWork from './components/OpenToWork'; // <-- import at top
 // import CompanyDetails from './components/CompanyDetails';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -16,9 +17,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import './styles/main.css';
 import CompanyList from './components/CompanyList'; // <-- import at top
 import UserProfile from './components/UserProfile';
-import OpenToWorkPost from './components/OpenToWorkPost';
-import OpenToWork from './components/OpenToWork'; // <-- import at top
-import OpenToWorkSuccess from './components/OpenToWorkSuccess'; // <-- import at top
+import OpenToWorkList from './components/OpenToWorkList';
+
+// <-- import at top
 function App() {
   return (
     <AuthProvider>
@@ -72,6 +73,13 @@ function App() {
                   <OpenToWork />
                 </ProtectedRoute>
               } />
+              <Route path="/company/jobseekers" element={
+                <ProtectedRoute requiredRole="ROLE_COMPANY">
+                  <OpenToWorkList />
+                </ProtectedRoute>
+              } />
+
+              {/* Fallback route */}
             </Routes>
 
           </main>

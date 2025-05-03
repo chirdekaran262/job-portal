@@ -12,12 +12,6 @@ const OpenToWorkStatus = () => {
 
     useEffect(() => {
         const checkOpenToWorkStatus = async () => {
-            if (!token) {
-                setError('Authentication required');
-                setLoading(false);
-                return;
-            }
-
             try {
                 const response = await fetch('http://localhost:8081/opentowork/status', {
                     method: 'GET',
@@ -30,8 +24,7 @@ const OpenToWorkStatus = () => {
                 if (response.ok) {
                     const data = await response.json();
                     console.log('Status response:', data);
-
-                    // Check if we have valid profile data
+                    // Check if we have valid profile data with an ID
                     if (data && data.id) {
                         setProfileData(data);
                         setHasOpenToWork(true);
@@ -43,11 +36,11 @@ const OpenToWorkStatus = () => {
                     setHasOpenToWork(false);
                     setProfileData(null);
                 } else {
-                    throw new Error(`Server responded with status: ${response.status}`);
+                    throw new Error('Failed to check OpenToWork status');
                 }
             } catch (err) {
-                console.error('Error checking OpenToWork status:', err);
                 setError('Could not check your OpenToWork status');
+                console.error('Error checking OpenToWork status:', err);
                 setHasOpenToWork(false);
                 setProfileData(null);
             } finally {
@@ -55,15 +48,12 @@ const OpenToWorkStatus = () => {
             }
         };
 
-        checkOpenToWorkStatus();
-    }, [token]); // Re-run when token changes
+        if (token) {
+            checkOpenToWorkStatus();
+        }
+    }, [token]);
 
     const handleDeleteOpenToWork = async () => {
-        if (!profileData?.id) {
-            setError('No profile to delete');
-            return;
-        }
-
         if (window.confirm('Are you sure you want to remove your OpenToWork profile?')) {
             try {
                 setLoading(true);
@@ -76,16 +66,16 @@ const OpenToWorkStatus = () => {
                     body: JSON.stringify({ id: profileData.id })
                 });
 
-                if (response.ok) {
-                    setHasOpenToWork(false);
-                    setProfileData(null);
-                    alert('Your OpenToWork profile has been removed.');
-                } else {
-                    throw new Error('Failed to delete profile');
+                if (!response.ok) {
+                    throw new Error('Failed to delete OpenToWork profile');
                 }
+
+                setHasOpenToWork(false);
+                setProfileData(null);
+                alert('Your OpenToWork profile has been removed.');
             } catch (err) {
-                console.error('Error deleting profile:', err);
-                setError('Failed to remove profile. Please try again.');
+                setError('Failed to remove your OpenToWork profile.');
+                console.error('Error deleting OpenToWork:', err);
             } finally {
                 setLoading(false);
             }
@@ -97,17 +87,7 @@ const OpenToWorkStatus = () => {
     }
 
     if (error) {
-        return (
-            <div className="opentowork-status error">
-                <p>{error}</p>
-                <button
-                    className="btn-secondary"
-                    onClick={() => window.location.reload()}
-                >
-                    Try Again
-                </button>
-            </div>
-        );
+        return <div className="opentowork-status error">{error}</div>;
     }
 
     return (
