@@ -1,0 +1,588 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fcfcfc;
+    /* Light beige background */
+    color: #333;
+    /* Dark text for readability */
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Merriweather', serif;
+    /* Rustic serif font for headings */
+    color: #4a4a29;
+    /* Earthy green-brown color */
+}
+
+a {
+    text-decoration: none;
+    color: #4a7c59;
+    /* Farm green */
+}
+
+a:hover {
+    color: #2e5d3a;
+    /* Darker green for hover */
+}
+
+/* Buttons */
+button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.seed-button {
+    background-color: #4a7c59;
+    /* Farm green */
+    color: #fff;
+}
+
+.seed-button:hover {
+    background-color: #2e5d3a;
+    /* Darker green */
+}
+
+.tend-button {
+    background-color: #f4a261;
+    /* Harvest orange */
+    color: #fff;
+}
+
+.tend-button:hover {
+    background-color: #e76f51;
+    /* Darker orange */
+}
+
+.remove-button {
+    background-color: #e63946;
+    /* Red for delete */
+    color: #fff;
+}
+
+.remove-button:hover {
+    background-color: #b71c1c;
+    /* Darker red */
+}
+
+.hire-button {
+    background-color: #4caf50;
+    /* Green for hire */
+    color: #fff;
+}
+
+.hire-button:hover {
+    background-color: #388e3c;
+    /* Darker green */
+}
+
+.pass-button {
+    background-color: #f44336;
+    /* Red for reject */
+    color: #fff;
+}
+
+.pass-button:hover {
+    background-color: #d32f2f;
+    /* Darker red */
+}
+
+/* Farm-Themed Containers */
+.farm-dashboard {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* .farm-header {
+    background-color: #4a7c59;
+     
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+.header {
+    background-color: var(--farm-green-600);
+    /* Fallback color */
+    background-image: url('../images/wheat.jpg');
+    /* Replace with your image path */
+    background-size: cover;
+    /* Ensures the image covers the entire header */
+    background-position: center bottom;
+    /* Focuses on the bottom center of the image */
+    background-repeat: no-repeat;
+    /* Prevents the image from repeating */
+    background-attachment: fixed;
+    /* Keeps the image fixed during scrolling */
+    color: white;
+    padding: 1.3rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 100px;
+    /* Adjust the height as needed */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.farm-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.farm-content {
+    margin-top: 20px;
+}
+
+.field-section,
+.harvest-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: #4a4a29;
+}
+
+.section-title .field-icon,
+.section-title .harvest-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* .field-icon {
+    background-image: url('/icons/field-icon.png');
+    
+}
+
+
+/* .harvest-icon {
+    background-image: url('/icons/harvest-icon.png');
+    
+}
+
+*/
+
+/* Job Cards */
+.crop-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.crop-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.crop-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #4a7c59;
+}
+
+.crop-description {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.crop-details {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.crop-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Applications Table */
+.harvest-table-container {
+    overflow-x: auto;
+}
+
+.harvest-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.harvest-table th,
+.harvest-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.harvest-table th {
+    background-color: #f4f4f0;
+    color: #4a4a29;
+    font-weight: bold;
+}
+
+.harvest-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-badge.pending {
+    background-color: #f4a261;
+    color: #fff;
+}
+
+.status-badge.confirmed {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.status-badge.rejected {
+    background-color: #e63946;
+    color: #fff;
+}
+
+/* Empty States */
+.empty-field,
+.empty-harvest {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #555;
+}
+
+.empty-field-icon,
+.empty-harvest-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+/* .empty-field-icon {
+    background-image: url('/icons/empty-field-icon.png');
+    /* Replace with your empty field icon */
+/* }
+
+.empty-harvest-icon {
+    background-image: url('/icons/empty-harvest-icon.png');
+    /* Replace with your empty harvest icon 
+} */
+
+/* FarmTheme.css */
+/* Main container styles */
+.harvest-container {
+    background-color: #f8f7f3;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.harvest-loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #5a7302;
+}
+
+.harvest-error {
+    background-color: #fbe6e6;
+    color: #d82c2c;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 90%;
+}
+
+/* Empty state styles */
+.empty-harvest {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fbfaf7;
+    border: 2px dashed #c1d37f;
+    border-radius: 8px;
+}
+
+.empty-harvest-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    /* background-image: url('/assets/empty-field.svg'); */
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.empty-harvest p {
+    color: #768c3e;
+    font-size: 18px;
+}
+
+/* Table styles */
+.harvest-table-container {
+    overflow-x: auto;
+}
+
+.harvest-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.harvest-table th {
+    background-color: #5a7302;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid #4a6002;
+}
+
+.harvest-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e9e9e9;
+    color: #444;
+}
+
+.harvest-table tr:last-child td {
+    border-bottom: none;
+}
+
+.harvest-table tr:hover {
+    background-color: #f9faf5;
+}
+
+/* Status badge styles */
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background-color: #fff5e6;
+    color: #e6a817;
+    border: 1px solid #fae3b8;
+}
+
+.status-badge.confirmed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+}
+
+.status-badge.rejected {
+    background-color: #f1f1f1;
+    color: #757575;
+    border: 1px solid #e0e0e0;
+}
+
+/* Action button styles */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.hire-button,
+.pass-button,
+.view-details-button,
+.close-button {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.hire-button {
+    background-color: #5a7302;
+    color: white;
+}
+
+.hire-button:hover {
+    background-color: #4a6002;
+}
+
+.pass-button {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.pass-button:hover {
+    background-color: #e0e0e0;
+}
+
+.view-details-button {
+    background-color: #768c3e;
+    color: white;
+}
+
+.view-details-button:hover {
+    background-color: #5a7302;
+}
+
+.close-button {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.processed-label {
+    color: #767676;
+    font-style: italic;
+}
+
+/* Applicant name styling */
+.farmhand-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.worker-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #e8f0d4;
+    border-radius: 50%;
+    display: inline-block;
+    /* background-image: url('/assets/worker-icon.svg'); */
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.modal-content h2 {
+    color: #5a7302;
+    margin-top: 0;
+    border-bottom: 2px solid #e8f0d4;
+    padding-bottom: 15px;
+}
+
+.modal-content h3 {
+    color: #768c3e;
+    margin: 20px 0 10px;
+    font-size: 18px;
+}
+
+.application-details p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.application-details strong {
+    color: #5a7302;
+}
+
+.cover-letter {
+    background-color: #f8f7f3;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 15px 0;
+    border-left: 4px solid #c1d37f;
+}
+
+.resume-section {
+    margin: 15px 0;
+}
+
+.resume-link {
+    display: inline-block;
+    background-color: #5a7302;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.resume-link:hover {
+    background-color: #4a6002;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #e8f0d4;
+    gap: 10px;
+}

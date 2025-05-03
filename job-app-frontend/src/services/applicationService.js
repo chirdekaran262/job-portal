@@ -7,13 +7,13 @@ export const applyForJob = async (jobId, userId, coverLetter = '', resumeUrl = '
         params.append('userId', userId);
         params.append('coverLetter', coverLetter);
         params.append('resumeUrl', resumeUrl);
-
+        
         const response = await axios.post(
             'http://localhost:8081/applications/apply',
             params,
             {
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }
         );

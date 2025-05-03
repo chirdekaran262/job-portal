@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/authService';
-import '../styles/components.css';
+import '../styles/register.css'; // Import the new CSS file
 
 const Register = () => {
     const [userData, setUserData] = useState({
@@ -56,8 +56,8 @@ const Register = () => {
     };
 
     return (
-        <div className="container">
-            <div className="form-container">
+        <div className="register-container">
+            <div className="register-form">
                 <h2>Create an Account</h2>
 
                 {error && (
