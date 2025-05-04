@@ -13,6 +13,7 @@ public interface JobService {
 
     boolean deleteJob(Long id);
 
+    List<Job> findByLocation(String location);
 
     boolean updateJob(Long id, Job job, Company company);
 

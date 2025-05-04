@@ -27,7 +27,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     private UserRepository userRepository;
 
     @Override
-    public boolean applyForJob(Long jobId, Long userId, String coverLetter, String resumeUrl) {
+    public boolean applyForJob(Long jobId, Long userId,String experience, String coverLetter, String resumeUrl  ) {
         Optional<Job> jobOptional = jobRepo.findById(jobId);
         Optional<Users> userOptional = userRepository.findById(userId);
 
@@ -38,6 +38,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
             JobApplication application = new JobApplication();
             application.setJob(job);
             application.setUser(users);
+            application.setExperience(experience);
             application.setCoverLetter(coverLetter);
             application.setResumeUrl(resumeUrl);
             application.setAppliedDate(LocalDateTime.now());

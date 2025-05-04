@@ -13,7 +13,7 @@ public class Job {
     private String location;
     private String minSalary;
     private String maxSalary;
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;

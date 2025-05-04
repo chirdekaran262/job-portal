@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface JobApplicationService {
     // Apply for a job
-    boolean applyForJob(Long jobId, Long userId, String coverLetter, String resumeUrl);
+    boolean applyForJob(Long jobId, Long userId,String experience, String coverLetter, String resumeUrl);
 
     // Get all applications
     List<JobApplication> getAllApplications();

@@ -24,6 +24,8 @@ public class JobApplication {
 
     private String status; // PENDING, CONFIRMED, REJECTED
 
+    private String experience;
+
     private String coverLetter;
 
     private String resumeUrl;
@@ -31,14 +33,14 @@ public class JobApplication {
     public JobApplication() {
     }
 
-    public JobApplication(Job job, Users users, String coverLetter, String resumeUrl) {
+    public JobApplication(Job job, Users users, String experience, String resumeUrl) {
         this.job = job;
         this.users = users;
-        this.coverLetter = coverLetter;
+        this.experience = experience;
         this.resumeUrl = resumeUrl;
         this.appliedDate = LocalDateTime.now();
         this.status = "PENDING";
-    }
+     }
 
     // Getters and Setters
     public Long getId() {
@@ -81,6 +83,16 @@ public class JobApplication {
         this.status = status;
     }
 
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+
+
     public String getCoverLetter() {
         return coverLetter;
     }
@@ -96,4 +108,6 @@ public class JobApplication {
     public void setResumeUrl(String resumeUrl) {
         this.resumeUrl = resumeUrl;
     }
+
+
 }

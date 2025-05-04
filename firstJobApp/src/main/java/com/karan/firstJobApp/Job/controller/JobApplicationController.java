@@ -51,20 +51,19 @@ public class JobApplicationController {
     public ResponseEntity<String> applyForJob(
             @RequestParam Long jobId,
             @RequestParam Long userId,
+            @RequestParam(required = false) String experience,
             @RequestParam(required = false) String coverLetter,
             @RequestParam(required = false) String resumeUrl) {
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//        Users currentUser = userRepo.findByUsername(userDetails.getUsername());
-//        if (!currentUser.getRole().equals("ROLE_COMPANY")) {
-//            return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
-//        }
+
         System.out.println(jobId);
-        boolean applied = jobApplicationService.applyForJob(jobId, userId, coverLetter, resumeUrl);
+        boolean applied = jobApplicationService.applyForJob(jobId, userId, experience,coverLetter, resumeUrl);
         if (applied) {
             return new ResponseEntity<>("Application submitted successfully", HttpStatus.CREATED);
         }
         return new ResponseEntity<>("Failed to submit application", HttpStatus.BAD_REQUEST);
     }
+
+
 
     @GetMapping("/job/{jobId}")
     public ResponseEntity<List<JobApplication>> getApplicationsByJob(@PathVariable Long jobId) {

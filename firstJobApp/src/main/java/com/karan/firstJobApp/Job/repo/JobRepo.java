@@ -10,4 +10,7 @@ import java.util.List;
 public interface JobRepo extends JpaRepository<Job,Long> {
 
     List<Job> findByCompanyId(Long id);
+
+
+    List<Job> findByLocationContainingIgnoreCase(String location);
 }

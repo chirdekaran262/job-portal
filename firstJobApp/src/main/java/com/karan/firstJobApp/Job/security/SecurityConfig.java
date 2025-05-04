@@ -51,6 +51,7 @@ public class SecurityConfig {
                         .requestMatchers("/applications/*/status").hasRole("COMPANY")
                         .requestMatchers("/applications/company/**").hasRole("COMPANY")
                         .requestMatchers("/applications/apply").permitAll()
+                        .requestMatchers("/opentowork/status").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement()

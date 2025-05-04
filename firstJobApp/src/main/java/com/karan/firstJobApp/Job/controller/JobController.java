@@ -26,6 +26,8 @@ public class JobController {
     private UserRepository userRepo;
     @GetMapping
     public ResponseEntity<List<Job>> findAll(){
+        List<Job> jobs = jobService.findAll();
+        System.out.println(jobs.get(2).getCompany().getName());
         return  new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
@@ -90,6 +92,19 @@ public class JobController {
             return new ResponseEntity<>(job,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/location")
+    public ResponseEntity<List<Job>> findAllByLocation(@RequestParam(required = false) String location) {
+        if (location == null || location.trim().isEmpty()) {
+            System.out.println("location is null");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // Return 400 if location is null or empty
+        }
+
+        List<Job> jobs = jobService.findByLocation(location.trim());
+
+
+        return new ResponseEntity<>(jobs, HttpStatus.OK); // Return 200 with the list of jobs
     }
 
     @DeleteMapping("/{id}")

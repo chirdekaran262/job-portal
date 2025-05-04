@@ -49,6 +49,11 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public List<Job> findByLocation(String location) {
+        return jobRepo.findByLocationContainingIgnoreCase(location);
+    }
+
+    @Override
     public boolean updateJob(Long id, Job job, Company company) {
         Optional<Job> job1 =jobRepo.findById(id);
         if(job1.isPresent()){
