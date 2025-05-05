@@ -26,6 +26,8 @@ body {
 
 .main-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 20px 0;
 }
 
@@ -39,4 +41,21 @@ body {
 
 .error {
     color: #dc3545;
+}
+
+header {
+    position: relative;
+    z-index: 10;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-container {
+        margin: 20px auto;
+        min-height: calc(100vh - 60px);
+    }
+
+    .login-card {
+        margin-top: -20px;
+    }
 }

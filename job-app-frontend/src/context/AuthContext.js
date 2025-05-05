@@ -1,4 +1,6 @@
+// src/context/AuthContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { getUserInfo, getToken, clearAuth, isTokenValid } from '../services/authService';
 
 // Create the context
 export const AuthContext = createContext();
@@ -13,22 +15,25 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Check for user in localStorage on component mount
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
+        // Check for user in cookies on component mount
+        const storedUser = getUserInfo();
+        const token = getToken();
+
+        if (storedUser && token && isTokenValid()) {
+            setUser(storedUser);
+        } else if (token || storedUser) {
+            // If token is invalid but we have some stale data, clear it
+            clearAuth();
         }
+
         setLoading(false);
     }, []);
 
-    // Login function
-    const login = (userData, token) => {
-        // Save user to state
-        setUser(userData);
-
-        // Save user and token to localStorage
-        localStorage.setItem('user', JSON.stringify(userData));
-        localStorage.setItem('token', token);
+    // Login function to be used after successful authentication
+    const login = (userData) => {
+        // The token and user info are already set in cookies by the authService
+        // Just update the state
+        setUser(userData.user);
     };
 
     // Logout function
@@ -36,14 +41,13 @@ export const AuthProvider = ({ children }) => {
         // Clear user from state
         setUser(null);
 
-        // Remove user and token from localStorage
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
+        // Clear cookies
+        clearAuth();
     };
 
     // Check if user is authenticated
     const isAuthenticated = () => {
-        return !!user;
+        return !!user && isTokenValid();
     };
 
     // Context value
@@ -57,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     );
 };

@@ -1,99 +1,129 @@
 // src/components/Login.js
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { loginUser } from '../services/authService';
+import { GoogleLogin } from '@react-oauth/google';
+import { loginUser, loginWithGoogle } from '../services/authService';
 import { AuthContext } from '../context/AuthContext';
-import '../styles/farm-theme.css';
+import '../styles/login.css';
 
 const Login = () => {
-    const [credentials, setCredentials] = useState({
-        username: '',
-        password: ''
-    });
+    const [credentials, setCredentials] = useState({ username: '', password: '' });
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
     const { login } = useContext(AuthContext);
-
-    // Get the page user was trying to access before redirecting to login
     const from = location.state?.from?.pathname || '/';
+
+    // Show success message if coming from registration
+    const successMessage = location.state?.message;
+
+    const validateInputs = useCallback(() => {
+        if (!credentials.username.trim()) {
+            setError('Username is required');
+            return false;
+        }
+        if (!credentials.password) {
+            setError('Password is required');
+            return false;
+        }
+        return true;
+    }, [credentials]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setCredentials({
-            ...credentials,
-            [name]: value
-        });
+        setCredentials(prev => ({ ...prev, [name]: value }));
+        setError(null); // Clear error when user types
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        setError(null);
+        if (!validateInputs()) return;
 
         try {
+            setLoading(true);
+            setError(null);
             const userData = await loginUser(credentials);
+
+            if (!userData || !userData.token || !userData.user) {
+                throw new Error('Invalid response from server');
+            }
+
             login(userData);
             navigate(from, { replace: true });
         } catch (err) {
-            setError(err.message || 'Login failed. Please check your credentials.');
+            console.error('Login error:', err);
+            setError(
+                err.response?.data?.message ||
+                err.message ||
+                'Login failed. Please check your credentials.'
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleGoogleSuccess = async (credentialResponse) => {
+        if (!credentialResponse?.credential) {
+            setError('Google login failed: No credentials received');
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError(null);
+            const userData = await loginWithGoogle(credentialResponse.credential);
+
+            if (!userData || !userData.token) {
+                throw new Error('Invalid response from server');
+            }
+
+            login(userData);
+            navigate(from, { replace: true });
+        } catch (err) {
+            console.error('Google login error:', err);
+            setError(
+                err.response?.data?.message ||
+                err.message ||
+                'Failed to login with Google'
+            );
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="container farm-background">
-            <div className="form-container">
-                <h2>Welcome Back to FarmConnect</h2>
-                <p className="form-subtitle">Log in to find farm jobs or hire agricultural workers</p>
+        <div className="login-container">
+            <div className="login-card">
+                <h2>Login</h2>
 
-                {error && (
-                    <div className="error-message">
-                        {error}
-                    </div>
-                )}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+                {error && <div className="error-message">{error}</div>}
 
-                <form onSubmit={handleSubmit} className="farm-form">
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
-                        <div className="input-icon-wrapper">
-                            <span className="input-icon input-icon-user"></span>
-                            <input
-                                type="text"
-                                id="username"
-                                name="username"
-                                value={credentials.username}
-                                onChange={handleChange}
-                                placeholder="Enter your username"
-                                required
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={credentials.username}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <div className="input-icon-wrapper">
-                            <span className="input-icon input-icon-lock"></span>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                value={credentials.password}
-                                onChange={handleChange}
-                                placeholder="Enter your password"
-                                required
-                            />
-                        </div>
-                    </div>
-
-                    <div className="remember-me">
-                        <label>
-                            <input type="checkbox" /> Remember me
-                        </label>
-                        <a href="#" className="forgot-password">Forgot Password?</a>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={credentials.password}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
 
                     <div className="button-group">
@@ -102,21 +132,27 @@ const Login = () => {
                             className={`btn btn-primary ${loading ? 'btn-disabled' : ''}`}
                             disabled={loading}
                         >
-                            {loading ? 'Logging in...' : 'Login to FarmConnect'}
+                            {loading ? 'Logging in...' : 'Login'}
                         </button>
                     </div>
                 </form>
 
-                <div className="form-footer">
-                    <p>
-                        Don't have an account? <Link to="/register">Register as a Farm Worker or Farm Owner</Link>
-                    </p>
+                <div className="google-login-container">
+                    <p>Or continue with</p>
+                    <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={() => setError('Google login failed')}
+                        useOneTap
+                        theme="filled_black"
+                        shape="pill"
+                        locale="en"
+                        text="continue_with"
+                        disabled={loading}
+                    />
                 </div>
 
-                <div className="farm-theme-footer">
-                    <div className="farm-icon tractor"></div>
-                    <div className="farm-icon wheat"></div>
-                    <div className="farm-icon sun"></div>
+                <div className="form-footer">
+                    <p>Don't have an account? <Link to="/register">Register here</Link></p>
                 </div>
             </div>
         </div>

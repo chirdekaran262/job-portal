@@ -1,22 +1,102 @@
-import Cookies from 'js-cookie';  // Import js-cookie
+// src/services/authService.js
+import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
 
-const API_URL = 'http://localhost:8081/api/auth';
-
-// Register a new user
-export const registerUser = async (userData) => {
+// User authentication API functions
+export const loginUser = async (credentials) => {
     try {
-        const response = await fetch(`${API_URL}/register`, {
+        const response = await fetch(`http://localhost:8081/api/auth/login`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userData),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentials),
         });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Login failed');
+        }
 
         const data = await response.json();
 
+        // Create a user object from the response data
+        const user = {
+            id: data.id,
+            username: data.username,
+            email: data.email,
+            role: data.role
+        };
+
+        // Store token and user info
+        setToken(data.token);
+        setUserInfo(user);
+
+        return {
+            token: data.token,
+            user
+        };
+    } catch (error) {
+        console.error('Login error:', error);
+        throw error;
+    }
+};
+
+export const loginWithGoogle = async (token) => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8081'}/api/auth/google`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token }),
+        });
+
         if (!response.ok) {
-            throw new Error(data.error || 'Registration failed');
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Google login failed');
         }
 
+        const data = await response.json();
+
+        // Create a user object from the response data
+        const user = {
+            id: data.id,
+            username: data.username,
+            email: data.email,
+            role: data.role
+        };
+
+        // Store token and user info
+        setToken(data.token);
+        setUserInfo(user);
+
+        return {
+            token: data.token,
+            user
+        };
+    } catch (error) {
+        console.error('Google login error:', error);
+        throw error;
+    }
+};
+
+export const registerUser = async (userData) => {
+    try {
+        const response = await fetch(`http://localhost:8081/api/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Registration failed');
+        }
+
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error('Registration error:', error);
@@ -24,75 +104,83 @@ export const registerUser = async (userData) => {
     }
 };
 
-// Login user
-export const loginUser = async (credentials) => {
-    try {
-        const response = await fetch(`${API_URL}/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(credentials),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || 'Login failed');
-        }
-
-        console.log('Login API Response:', data);
-
-        // Save token and user info in cookies
-        if (data.token) {
-            // Set the token in a cookie
-            Cookies.set('token', data.token, { expires: 7, secure: true, sameSite: 'Strict' });
-
-            // Set user info in a cookie
-            Cookies.set('user', JSON.stringify({
-                id: data.id,
-                username: data.username,
-                email: data.email,
-                role: data.role,
-            }), { expires: 7, secure: true, sameSite: 'Strict' });
-
-            console.log('Token saved to cookies:', data.token);
-        } else {
-            console.warn('Token missing in response!');
-        }
-
-        return data;
-    } catch (error) {
-        console.error('Login error:', error);
-        throw error;
-    }
-};
-
-// Get token from cookies
-export const getToken = () => {
-    const token = Cookies.get('token');
-    if (!token) {
-        console.warn('No token found in cookies!');
-    }
-    return token;
-};
-
-// Logout user (remove cookies)
-export const logoutUser = () => {
-    Cookies.remove('token');
-    Cookies.remove('user');
-};
-
-// Get user info from cookies
-export const getUserInfo = () => {
-    const userJson = Cookies.get('user');
-    return userJson ? JSON.parse(userJson) : null;
-};
-
-// Set token manually in cookies
+// Token management functions
 export const setToken = (token) => {
-    Cookies.set('token', token, { expires: 7, secure: true, sameSite: 'Strict' });
+    try {
+        if (token) {
+            // Set cookie with secure flag and expiry of 7 days
+            Cookies.set('token', token, {
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                expires: 7
+            });
+        } else {
+            Cookies.remove('token');
+        }
+    } catch (error) {
+        console.error('Error setting token:', error);
+    }
 };
 
-// Set user info manually in cookies
 export const setUserInfo = (user) => {
-    Cookies.set('user', JSON.stringify(user), { expires: 7, secure: true, sameSite: 'Strict' });
+    try {
+        if (user) {
+            // Set cookie with secure flag and expiry of 7 days
+            Cookies.set('user', JSON.stringify(user), {
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                expires: 7
+            });
+        } else {
+            Cookies.remove('user');
+        }
+    } catch (error) {
+        console.error('Error setting user info:', error);
+    }
+};
+
+export const getToken = () => {
+    try {
+        return Cookies.get('token') || null;
+    } catch (error) {
+        console.error('Error getting token:', error);
+        return null;
+    }
+};
+
+export const getUserInfo = () => {
+    try {
+        const userStr = Cookies.get('user');
+        return userStr ? JSON.parse(userStr) : null;
+    } catch (error) {
+        console.error('Error parsing user info:', error);
+        return null;
+    }
+};
+
+export const isTokenValid = () => {
+    const token = getToken();
+    if (!token) return false;
+
+    try {
+        const decoded = jwtDecode(token);
+        // Check if the token is expired
+        return decoded.exp * 1000 > Date.now();
+    } catch (error) {
+        console.error('Error validating token:', error);
+        return false;
+    }
+};
+
+export const clearAuth = () => {
+    try {
+        Cookies.remove('token');
+        Cookies.remove('user');
+    } catch (error) {
+        console.error('Error clearing auth:', error);
+    }
+};
+
+export const logoutUser = () => {
+    clearAuth();
 };
