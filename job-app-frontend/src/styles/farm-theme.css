@@ -1,75 +1,117 @@
-/* Enhanced Farm Theme CSS */
+/* ======================================== */
+/*          Farm Theme Variables            */
+/* ======================================== */
 :root {
-    /* Earthy color palette */
+    /* Primary Palette (Greens) */
     --farm-green-50: #f0f7e9;
     --farm-green-100: #e1efd3;
     --farm-green-200: #c3dfaa;
     --farm-green-300: #a5ce81;
     --farm-green-400: #87be58;
     --farm-green-500: #6a9e3f;
+    /* Main Primary */
     --farm-green-600: #558032;
+    /* Darker Primary */
     --farm-green-700: #406126;
+    /* Heading/Strong Text */
     --farm-green-800: #2b411a;
     --farm-green-900: #15200d;
 
-    /* Warm earth tones */
-    --farm-brown-50: #f9f5f0;
-    --farm-brown-100: #f1e9df;
-    --farm-brown-200: #e3d3be;
-    --farm-brown-300: #d5bd9e;
-    --farm-brown-400: #c7a77d;
-    --farm-brown-500: #b9915d;
-    --farm-brown-600: #9a7445;
-    --farm-brown-700: #735634;
-    --farm-brown-800: #4d3922;
-    --farm-brown-900: #261d11;
-
-    /* Harvest colors */
+    /* Accent Palette (Amber/Yellow) */
     --farm-amber-50: #fef9e7;
     --farm-amber-100: #fcf3cf;
     --farm-amber-200: #f9e79f;
     --farm-amber-300: #f7db6f;
     --farm-amber-400: #f4cf3f;
     --farm-amber-500: #f1c40f;
+    /* Accent */
     --farm-amber-600: #c19d0c;
+    /* Stronger Accent */
     --farm-amber-700: #917609;
     --farm-amber-800: #604e06;
-    --farm-amber-900: #302703;
+    /* Dark Accent Text */
+    --farm-amber-900: #382e04;
+    /* Darker Accent Text */
 
-    /* Sky and water */
-    --farm-blue-50: #e8f4fd;
-    --farm-blue-100: #d1e9fb;
-    --farm-blue-200: #a3d3f7;
-    --farm-blue-300: #75bdf3;
-    --farm-blue-400: #47a7ef;
-    --farm-blue-500: #1991eb;
-    --farm-blue-600: #1474bc;
-    --farm-blue-700: #0f578d;
-    --farm-blue-800: #0a3a5e;
-    --farm-blue-900: #051d2f;
+    /* Neutral Palette (Browns/Grays - simplified) */
+    --farm-neutral-50: #f9f5f0;
+    /* Light Background Alt */
+    --farm-neutral-100: #f1e9df;
+    /* Subtle Borders / Hover BG */
+    --farm-neutral-200: #e3d3be;
+    /* Borders */
+    --farm-neutral-700: #735634;
+    /* Muted Text */
+    --farm-neutral-900: #261d11;
+    /* Dark Text */
 
-    /* Tomato red */
+    /* Action Colors */
     --farm-red-50: #fdeeee;
     --farm-red-100: #fbdddd;
-    --farm-red-200: #f7bbbb;
-    --farm-red-300: #f39999;
-    --farm-red-400: #ef7777;
     --farm-red-500: #eb5555;
+    /* Danger */
     --farm-red-600: #bc4444;
-    --farm-red-700: #8d3333;
-    --farm-red-800: #5e2222;
-    --farm-red-900: #2f1111;
+    /* Darker Danger */
+    --farm-blue-100: #d1e9fb;
+    /* Info BG */
+    --farm-blue-600: #1474bc;
+    /* Info Text/Border */
+
+    /* Fonts */
+    --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Primary text font */
+    --font-secondary: 'Georgia', serif;
+    /* Alternative serif */
+    --font-display: 'Roboto Slab', Georgia, serif;
+    /* Display headings */
+    --font-heading: 'Trebuchet MS', 'Lucida Grande', sans-serif;
+    /* Main headings */
+
+    /* Sizes & Spacing */
+    --header-height: 70px;
+    /* Adjusted header height */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-pill: 50px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --spacing-xs: 0.25rem;
+    /* 4px */
+    --spacing-sm: 0.5rem;
+    /* 8px */
+    --spacing-md: 1rem;
+    /* 16px */
+    --spacing-lg: 1.5rem;
+    /* 24px */
+    --spacing-xl: 2rem;
+    /* 32px */
+    --spacing-xxl: 2.5rem;
+    /* 40px */
 }
 
-/* Base styles */
+/* ======================================== */
+/*              Base Styles                 */
+/* ======================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #f8f9f4;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a5ce81' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    color: #333;
-    font-family: "Georgia", serif;
-    line-height: 1.6;
+    font-family: var(--font-primary);
+    background-color: var(--farm-neutral-50);
+    /* Simplified subtle background pattern */
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2352842d' fill-opacity='0.04'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    color: var(--farm-neutral-900);
+    line-height: 1.7;
+    /* Improved line height */
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -78,842 +120,181 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+    font-family: var(--font-heading);
+    color: var(--farm-green-700);
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+    line-height: 1.3;
+    font-weight: 600;
+    /* Ensure consistent weight */
 }
 
-/* General Layout */
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-size: 1.1rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+p {
+    margin: 0 0 var(--spacing-md) 0;
+}
+
+ul,
+ol {
+    margin: 0 0 var(--spacing-md) 0;
+    padding-left: var(--spacing-lg);
+    /* Default list padding */
+}
+
+a {
+    color: var(--farm-green-600);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--farm-green-700);
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ======================================== */
+/*              Layout                      */
+/* ======================================== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* For Job Details Page */
 .farm-job-details {
-    padding: 2rem 1rem;
+    padding: var(--spacing-xl) 0;
+    /* Remove side padding here, container handles it */
 }
 
 .farm-job-container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    /* Add padding here */
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    /* Mobile first: single column */
+    gap: var(--spacing-xl);
 }
 
+/* Define columns for larger screens */
 @media (min-width: 992px) {
     .farm-job-container {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr);
+        /* Flexible sizing */
     }
 }
 
-/* Loading State */
-.farm-loading {
+/* Explicit styling for main content and sidebar columns */
+.farm-job-main {
+    /* Styles specific to the main content area if needed */
+    /* E.g., background, border */
+}
+
+.farm-job-sidebar {
+    /* Styles specific to the sidebar area */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60vh;
-    color: var(--farm-green-700);
-    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a5ce81' fill-opacity='0.15'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    gap: var(--spacing-xl);
+    /* Space between sidebar cards */
 }
 
-.tractor-loader {
-    width: 80px;
-    height: 80px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 4h9l1 7M4 11h4'/%3E%3Ccircle cx='7' cy='15' r='2'/%3E%3Cpath d='M16 15h3a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4h-3v8Z'/%3E%3Ccircle cx='17' cy='15' r='2'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    animation: bounce 1s infinite alternate;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-}
-
-@keyframes bounce {
-    from {
-        transform: translateY(0);
-    }
-
-    to {
-        transform: translateY(-10px);
-    }
-}
-
-.farm-loading p {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--farm-green-700);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-/* Error State */
-.farm-error {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 40vh;
-    padding: 2rem;
-    text-align: center;
-    background-color: var(--farm-brown-50);
-    border-radius: 8px;
-    border: 1px solid var(--farm-brown-200);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.error-icon {
-    width: 60px;
-    height: 60px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bc4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-bottom: 1rem;
-}
-
-.farm-error p {
-    color: var(--farm-red-600);
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Main Job Card */
-.farm-job-card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    border: 1px solid var(--farm-green-200);
-    position: relative;
-}
-
-.farm-job-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(to right, var(--farm-green-500), var(--farm-amber-500));
-}
-
-.farm-job-header {
-    background: linear-gradient(135deg, var(--farm-green-50), var(--farm-amber-50));
-    padding: 2rem;
-    border-bottom: 1px solid var(--farm-green-100);
-    position: relative;
-    overflow: hidden;
-}
-
-.farm-job-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 150px;
-    height: 150px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M80 40C80 40 70 50 50 50C30 50 20 40 20 40' stroke='%236a9e3f' stroke-width='1' stroke-opacity='0.1' stroke-linecap='round'/%3E%3Cpath d='M85 50C85 50 70 65 50 65C30 65 15 50 15 50' stroke='%236a9e3f' stroke-width='1' stroke-opacity='0.1' stroke-linecap='round'/%3E%3Cpath d='M90 60C90 60 70 80 50 80C30 80 10 60 10 60' stroke='%236a9e3f' stroke-width='1' stroke-opacity='0.1' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-.farm-job-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-
-.farm-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.35rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.farm-badge.job-type {
-    background-color: var(--farm-amber-100);
-    color: var(--farm-amber-800);
-    border: 1px solid var(--farm-amber-200);
-}
-
-.farm-badge.job-date {
-    background-color: var(--farm-green-100);
-    color: var(--farm-green-800);
-    border: 1px solid var(--farm-green-200);
-}
-
-.farm-job-title {
-    color: var(--farm-green-900);
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 1.25rem 0;
-    line-height: 1.2;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
-    position: relative;
-}
-
-.farm-job-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--farm-green-100);
-}
-
-@media (min-width: 768px) {
-    .farm-job-meta {
-        flex-direction: row;
-        gap: 2rem;
-    }
-}
-
-.farm-job-company,
-.farm-job-location,
-.farm-job-salary {
-    display: flex;
-    align-items: center;
-    color: var(--farm-green-800);
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.icon-company,
-.icon-location,
-.icon-salary,
-.icon-calendar,
-.icon-sun,
-.icon-leaf,
-.icon-rain,
-.icon-document {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    margin-right: 0.75rem;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.8));
-}
-
-.icon-company {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
-}
-
-.icon-location {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
-}
-
-.icon-salary {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='1' x2='12' y2='23'/%3E%3Cpath d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/%3E%3C/svg%3E");
-}
-
-.icon-calendar {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
-}
-
-.icon-sun {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1c40f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cline x1='12' y1='1' x2='12' y2='3'/%3E%3Cline x1='12' y1='21' x2='12' y2='23'/%3E%3Cline x1='4.22' y1='4.22' x2='5.64' y2='5.64'/%3E%3Cline x1='18.36' y1='18.36' x2='19.78' y2='19.78'/%3E%3Cline x1='1' y1='12' x2='3' y2='12'/%3E%3Cline x1='21' y1='12' x2='23' y2='12'/%3E%3Cline x1='4.22' y1='19.78' x2='5.64' y2='18.36'/%3E%3Cline x1='18.36' y1='5.64' x2='19.78' y2='4.22'/%3E%3C/svg%3E");
-}
-
-.icon-leaf {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z'/%3E%3C/svg%3E");
-}
-
-.icon-rain {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231991eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 16.2A4.5 4.5 0 0 0 17.5 8h-1.8A7 7 0 1 0 4 14.9'/%3E%3Cpath d='M16 14v6'/%3E%3Cpath d='M8 14v6'/%3E%3Cpath d='M12 16v6'/%3E%3C/svg%3E");
-}
-
-.icon-document {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1c40f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
-}
-
-/* Job Content Sections */
-.farm-job-section {
-    padding: 2rem;
-    position: relative;
-    background-color: white;
-    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236a9e3f' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.section-title {
-    color: var(--farm-green-800);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 1.5rem 0;
-    display: flex;
-    align-items: center;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--farm-green-100);
-}
-
-.farm-job-description {
-    color: #4a5568;
-    line-height: 1.8;
-    margin: 0;
-    font-size: 1.05rem;
-}
-
-.farm-divider {
-    height: 1px;
-    background: linear-gradient(to right, var(--farm-green-100), var(--farm-amber-100), var(--farm-green-100));
-    margin: 0;
-}
-
-.farm-requirements-list,
-.farm-benefits-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.farm-requirements-list li,
-.farm-benefits-list li {
-    position: relative;
-    padding-left: 2rem;
-    margin-bottom: 1rem;
-    color: #4a5568;
-    font-size: 1.05rem;
-}
-
-.farm-requirements-list li:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.5rem;
-    width: 16px;
-    height: 16px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.farm-benefits-list li:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.5rem;
-    width: 16px;
-    height: 16px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1c40f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.farm-job-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, var(--farm-green-50), var(--farm-amber-50));
-    border-top: 1px solid var(--farm-green-100);
-    position: relative;
-    overflow: hidden;
-}
-
-.farm-job-footer::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236a9e3f' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-}
-
-@media (min-width: 768px) {
-    .farm-job-footer {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-}
-
-.farm-job-deadline {
-    display: flex;
-    align-items: center;
-    color: var(--farm-green-800);
-    font-size: 1rem;
-    font-weight: 500;
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: 1px solid var(--farm-green-100);
-}
-
-.farm-job-actions {
-    display: flex;
-    gap: 1rem;
-    z-index: 1;
-}
-
-/* Status Message */
-.farm-status-message {
-    margin-top: 1.5rem;
-    padding: 1.25rem;
-    border-radius: 8px;
-    background-color: var(--farm-green-100);
-    color: var(--farm-green-800);
-    border: 1px solid var(--farm-green-200);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    font-weight: 500;
-    position: relative;
-    padding-left: 3rem;
-}
-
-.farm-status-message::before {
-    content: "";
-    position: absolute;
-    left: 1rem;
-    top: 1.25rem;
-    width: 24px;
-    height: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-/* Sidebar Components */
-.farm-company-card,
-.farm-application-card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    margin-bottom: 2rem;
-    position: relative;
-}
-
-.farm-company-card {
-    border: 1px solid var(--farm-green-200);
-}
-
-.farm-company-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(to right, var(--farm-green-500), var(--farm-green-400));
-}
-
-.farm-application-card {
-    border: 1px solid var(--farm-amber-200);
-}
-
-.farm-application-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(to right, var(--farm-amber-500), var(--farm-amber-400));
-}
-
-.farm-company-header,
-.farm-application-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--farm-green-100);
-}
-
-.farm-company-header {
-    background: linear-gradient(135deg, var(--farm-green-50), var(--farm-green-100));
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.farm-application-header {
-    background: linear-gradient(135deg, var(--farm-amber-50), var(--farm-amber-100));
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-    overflow: hidden;
-}
-
-.farm-application-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100px;
-    height: 100px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M80 40C80 40 70 50 50 50C30 50 20 40 20 40' stroke='%23f1c40f' stroke-width='1' stroke-opacity='0.2' stroke-linecap='round'/%3E%3Cpath d='M85 50C85 50 70 65 50 65C30 65 15 50 15 50' stroke='%23f1c40f' stroke-width='1' stroke-opacity='0.2' stroke-linecap='round'/%3E%3Cpath d='M90 60C90 60 70 80 50 80C30 80 10 60 10 60' stroke='%23f1c40f' stroke-width='1' stroke-opacity='0.2' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-.farm-application-header h3 {
-    color: var(--farm-amber-800);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
-}
-
-.farm-application-header p {
-    color: var(--farm-amber-700);
-    margin: 0;
-    font-size: 1rem;
-}
-
-.farm-company-logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: white;
-    padding: 0.5rem;
-    border: 1px solid var(--farm-green-200);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.farm-company-logo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.farm-company-header h3 {
-    color: var(--farm-green-900);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0 0 0.25rem 0;
-}
-
-.farm-company-header p {
-    color: var(--farm-green-700);
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-.farm-company-content {
-    padding: 1.5rem;
-}
-
-.farm-company-about {
-    background-color: var(--farm-green-50);
-    padding: 1.25rem;
-    border-radius: 8px;
-    border: 1px solid var(--farm-green-100);
-    margin-bottom: 1.5rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.farm-company-about::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236a9e3f' fill-opacity='0.05'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-}
-
-.farm-company-about h4 {
-    color: var(--farm-green-800);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0 0 0.75rem 0;
-}
-
-.farm-company-about p {
-    color: #4a5568;
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-.farm-company-highlights h4 {
-    color: var(--farm-green-800);
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0 0 1rem 0;
-}
-
-.farm-highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
-.farm-highlight-item {
-    background-color: var(--farm-amber-50);
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--farm-amber-100);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.farm-highlight-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.highlight-label {
-    display: block;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: var(--farm-amber-800);
-    margin-bottom: 0.35rem;
-}
-
-.highlight-value {
-    font-size: 1rem;
-    color: #4a5568;
-}
-
-/* Application Form */
-.farm-application-form {
-    padding: 1.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f1c40f' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--farm-brown-800);
-    font-size: 0.95rem;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    padding: 0.85rem;
-    border: 2px solid var(--farm-amber-200);
-    border-radius: 8px;
-    background-color: white;
-    color: #4a5568;
-    font-size: 1rem;
-    transition: all 0.2s ease-in-out;
-    font-family: inherit;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: var(--farm-amber-400);
-    box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.2);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #a0aec0;
-}
-
-.form-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    justify-content: flex-end;
-}
-
-/* Farm Resources */
-.farm-resources {
-    background-color: var(--farm-amber-50);
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid var(--farm-amber-200);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.farm-resources::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(to right, var(--farm-amber-500), var(--farm-amber-400));
-}
-
-.farm-resources::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f1c40f' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-}
-
-.farm-resources h3 {
-    color: var(--farm-amber-800);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0 0 1.25rem 0;
-    position: relative;
-    z-index: 1;
-}
-
-.farm-resources-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    z-index: 1;
-}
-
-.farm-resources-list li {
-    margin-bottom: 1rem;
-}
-
-.farm-resources-list li:last-child {
-    margin-bottom: 0;
-}
-
-.farm-resource-link {
-    display: flex;
-    align-items: center;
-    color: var(--farm-amber-700);
-    text-decoration: none;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    background-color: white;
-    border: 1px solid var(--farm-amber-200);
-    transition: all 0.2s ease-in-out;
-    font-size: 1rem;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.farm-resource-link:hover {
-    background-color: var(--farm-amber-100);
-    color: var(--farm-amber-900);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Buttons */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 1rem;
-    border: none;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary {
-    background-color: var(--farm-green-600);
-    color: white;
-    border: 2px solid var(--farm-green-600);
-}
-
-.btn-primary:hover {
-    background-color: var(--farm-green-700);
-    border-color: var(--farm-green-700);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn-secondary {
-    background-color: white;
-    color: var(--farm-green-700);
-    border: 2px solid var(--farm-green-600);
-}
-
-.btn-secondary:hover {
-    background-color: var(--farm-green-50);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.btn-full {
-    width: 100%;
-    margin-top: 1.5rem;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .farm-job-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .farm-job-actions .btn {
-        width: 100%;
-    }
-
-    .form-actions {
-        flex-direction: column;
-    }
-
-    .form-actions .btn {
-        width: 100%;
-    }
-}
 
-/* Header Styling */
+/* ======================================== */
+/*              Header                      */
+/* ======================================== */
 .header {
-    background-color: rgb(14, 174, 5);
+    background-color: white;
+    /* Cleaner header background */
     border-bottom: 1px solid var(--farm-green-100);
-    padding: 1rem 0;
+    height: var(--header-height);
+    padding: 0 var(--spacing-md);
+    /* Use consistent spacing */
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
 }
 
 .header .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0;
+    /* Container handles its own padding */
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    /* Slightly adjusted size */
     font-weight: 700;
     color: var(--farm-green-700);
     text-decoration: none;
-    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: opacity 0.2s ease;
 }
 
-.logo:before {
-    content: "";
-    display: inline-block;
+.logo:hover {
+    opacity: 0.85;
+    text-decoration: none;
+}
+
+/* Logo Icon - Assumes SVG/IMG in HTML */
+.logo svg,
+.logo img {
+    display: block;
     width: 32px;
+    /* Consistent icon size */
     height: 32px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 4h9l1 7M4 11h4'/%3E%3Ccircle cx='7' cy='15' r='2'/%3E%3Cpath d='M16 15h3a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4h-3v8Z'/%3E%3Ccircle cx='17' cy='15' r='2'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
+    padding: var(--spacing-xs);
+    background-color: var(--farm-amber-400);
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.logo svg {
+    fill: var(--farm-green-900);
 }
 
 .nav {
     display: flex;
+    align-items: center;
 }
 
 .nav-list {
@@ -921,267 +302,351 @@ h6 {
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 0.75rem;
-}
-
-.nav-item {
-    position: relative;
+    gap: var(--spacing-sm);
 }
 
 .nav-link {
+    /* Base style for nav links */
     display: block;
-    padding: 0.65rem 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     color: var(--farm-green-700);
     text-decoration: none;
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
     transition: all 0.2s ease-in-out;
+    font-size: 0.95rem;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
     background-color: var(--farm-green-50);
     color: var(--farm-green-800);
+    text-decoration: none;
 }
 
-.register-button {
+/* Specific Nav Button */
+.nav-link.register-button {
     background-color: var(--farm-green-600);
-    color: white !important;
-    padding: 0.65rem 1.25rem;
+    color: white;
+    box-shadow: var(--shadow-sm);
 }
 
-.register-button:hover {
+.nav-link.register-button:hover {
     background-color: var(--farm-green-700);
+    color: white;
+    transform: translateY(-1px);
 }
 
-.dropdown {
+/* User Dropdown */
+.user-dropdown {
+    /* Renamed from .dropdown for clarity */
     position: relative;
 }
 
 .dropdown-button {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1rem;
-    background-color: white;
-    border: 2px solid var(--farm-green-200);
-    border-radius: 8px;
-    color: var(--farm-green-700);
-    font-weight: 600;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs);
+    /* Padding around avatar */
+    background: none;
+    border: 2px solid transparent;
+    /* For focus state */
+    border-radius: 50%;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: background-color 0.2s ease;
+    outline-offset: 2px;
 }
 
 .dropdown-button:hover {
     background-color: var(--farm-green-50);
 }
 
-.dropdown-icon {
-    font-size: 0.75rem;
+.dropdown-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--farm-amber-400);
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--farm-green-700);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle border on dark bg */
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.5rem);
+    /* Adjust spacing */
     right: 0;
     width: 200px;
     background-color: white;
     border: 1px solid var(--farm-green-100);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-top: 0.5rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-sm);
     display: none;
-    z-index: 10;
+    /* JS toggles this */
+    z-index: 1010;
     overflow: hidden;
+    padding: var(--spacing-sm) 0;
 }
 
-.dropdown:hover .dropdown-menu {
+.user-dropdown:hover .dropdown-menu,
+/* Simple hover for example */
+.user-dropdown.active .dropdown-menu {
+    /* Better: JS toggles .active */
     display: block;
 }
 
 .dropdown-link {
-    display: block;
-    padding: 0.85rem 1.25rem;
-    color: var(--farm-green-700);
+    display: flex;
+    /* Use flex for icon alignment */
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.75rem var(--spacing-md);
+    color: var(--farm-neutral-700);
     text-decoration: none;
     transition: all 0.15s ease-in-out;
     border: none;
     background: none;
     text-align: left;
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     font-weight: 500;
 }
 
 .dropdown-link:hover {
     background-color: var(--farm-green-50);
+    color: var(--farm-green-700);
+    text-decoration: none;
+}
+
+/* Icon within dropdown link */
+.dropdown-link .icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
 }
 
 .dropdown-link.logout {
     color: var(--farm-red-600);
     border-top: 1px solid var(--farm-green-100);
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
 }
 
 .dropdown-link.logout:hover {
     background-color: var(--farm-red-50);
 }
 
+/* Mobile Menu */
 .mobile-menu-button {
     display: none;
+    /* Hidden on desktop */
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: var(--spacing-sm);
+    z-index: 1001;
+    /* Ensure it's clickable */
 }
 
 .icon-menu {
+    /* Needs corresponding HTML element */
     display: block;
     width: 24px;
     height: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='21' y2='12'/%3E%3Cline x1='3' y1='6' x2='21' y2='6'/%3E%3Cline x1='3' y1='18' x2='21' y2='18'/%3E%3C/svg%3E");
+    /* Replace with your actual SVG/Icon */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23406126' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='12' x2='21' y2='12'/%3E%3Cline x1='3' y1='6' x2='21' y2='6'/%3E%3Cline x1='3' y1='18' x2='21' y2='18'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
 }
 
-@media (max-width: 768px) {
-    .nav {
-        display: none;
-    }
 
-    .mobile-menu-button {
-        display: block;
-    }
-}
-
-/* Custom animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.farm-job-card,
-.farm-company-card,
-.farm-application-card,
-.farm-resources {
-    animation: fadeIn 0.5s ease-out forwards;
-}
-
-/* src/styles/farm-theme.css */
-
-/* Farm Theme Variables */
-:root {
-    --farm-green-50: #f0f8e9;
-    --farm-green-100: #dceecc;
-    --farm-green-200: #bfdd9b;
-    --farm-green-300: #9dca69;
-    --farm-green-400: #83bb45;
-    --farm-green-500: #689e38;
-    --farm-green-600: #52842d;
-    --farm-green-700: #426a24;
-    --farm-green-800: #35521d;
-    --farm-green-900: #2a4018;
-
-    --farm-brown-50: #f8f5f0;
-    --farm-brown-100: #f5e6d3;
-    --farm-brown-200: #e8d0b0;
-    --farm-brown-300: #d9b38c;
-    --farm-brown-400: #c79b6f;
-    --farm-brown-500: #a67c52;
-    --farm-brown-600: #95714a;
-    --farm-brown-700: #7a5a3d;
-    --farm-brown-800: #5e4530;
-    --farm-brown-900: #483624;
-
-    --farm-amber-100: #fff8e0;
-    --farm-amber-200: #ffebb3;
-    --farm-amber-300: #ffdd80;
-    --farm-amber-400: #ffc633;
-    --farm-amber-500: #ffae00;
-
-    --farm-red-50: #fef1f1;
-    --farm-red-100: #fad4d4;
-    --farm-red-500: #e53e3e;
-    --farm-red-600: #c53030;
-
-    --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-display: 'Roboto Slab', Georgia, serif;
-}
-
-/* General Styles */
-body {
+/* ======================================== */
+/*              Buttons                     */
+/* ======================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    /* Base padding */
     font-family: var(--font-primary);
-    margin: 0;
-    padding: 0;
-    color: #333;
-    background-color: var(--farm-green-50);
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: var(--border-radius-md);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid transparent;
+    /* Base border */
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    /* For potential effects */
+    line-height: 1.5;
+    /* Ensure consistent line height */
+    text-align: center;
 }
 
-/* Form Container */
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    /* Remove underline on hover */
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+    background-color: var(--farm-green-600);
+    color: white;
+    border-color: var(--farm-green-600);
+}
+
+.btn-primary:hover {
+    background-color: var(--farm-green-700);
+    border-color: var(--farm-green-700);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: var(--farm-green-700);
+    border-color: var(--farm-green-600);
+}
+
+.btn-secondary:hover {
+    background-color: var(--farm-green-50);
+    border-color: var(--farm-green-700);
+    color: var(--farm-green-800);
+}
+
+.btn-accent {
+    /* Example using Amber */
+    background-color: var(--farm-amber-500);
+    color: var(--farm-neutral-900);
+    border-color: var(--farm-amber-500);
+}
+
+.btn-accent:hover {
+    background-color: var(--farm-amber-600);
+    border-color: var(--farm-amber-600);
+    color: var(--farm-neutral-900);
+}
+
+.btn-full {
+    /* Modifier for full width */
+    width: 100%;
+    display: flex;
+    /* Ensure flex properties work */
+}
+
+.btn-disabled,
+.btn:disabled {
+    background-color: var(--farm-neutral-200);
+    border-color: var(--farm-neutral-200);
+    color: var(--farm-neutral-700);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.7;
+}
+
+.btn-disabled:hover,
+.btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* ======================================== */
+/*              Forms (Login/Apply)         */
+/* ======================================== */
 .farm-background {
-    min-height: calc(100vh - 70px);
-    /* Adjust based on header height */
-    background-image: linear-gradient(rgba(255, 255, 255, 0.95),
-            rgba(255, 255, 255, 0.95)),
-        url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2352842d' fill-opacity='0.05'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%2352842d' fill-opacity='0.06'%3E%3Cpath fill-rule='evenodd' d='M41 37.59V25h-2v12.59l-8.9-8.9-1.41 1.41 8.9 8.9H25v2h12.59l-8.9 8.9 1.41 1.41 8.9-8.9V55h2V42.41l8.9 8.9 1.41-1.41-8.9-8.9H55v-2H42.41l8.9-8.9-1.41-1.41-8.9 8.9zM1 1h2v2H1V1zm4 0h2v2H5V1zm4 0h2v2H9V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm4 0h2v2h-2V1zm0 4h2v2h-2V5zm0 4h2v2h-2V9zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm4-4h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2H1v-2z'/%3E%3C/g%3E%3C/svg%3E");
+    /* Container for forms */
+    min-height: calc(100vh - var(--header-height));
+    background-image:
+        /* Combined simplified background */
+        linear-gradient(rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.97)),
+        url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2352842d' fill-opacity='0.04'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: var(--spacing-xl);
 }
 
 .form-container {
+    /* Login Form Box */
     background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 500px;
-    padding: 2.5rem;
+    max-width: 450px;
+    /* Adjusted max width */
+    padding: var(--spacing-xxl);
     position: relative;
     overflow: hidden;
     border: 1px solid var(--farm-green-100);
+    animation: fadeIn 0.5s ease-out forwards;
 }
 
 .form-container:before {
+    /* Top border accent */
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 6px;
+    height: 5px;
     background: linear-gradient(to right, var(--farm-green-500), var(--farm-amber-400));
-    border-radius: 6px 6px 0 0;
 }
 
 .form-container h2 {
     font-family: var(--font-display);
+    /* Distinct font for form title */
     color: var(--farm-green-700);
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
+    margin-top: 0;
+    /* Remove default margin */
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.8rem;
+    /* Adjusted size */
     text-align: center;
 }
 
 .form-subtitle {
     text-align: center;
-    color: var(--farm-green-600);
-    margin-bottom: 2rem;
+    color: var(--farm-neutral-700);
+    /* Muted subtitle */
+    margin-bottom: var(--spacing-xl);
     font-size: 1rem;
 }
 
-/* Form Styles */
-.farm-form {
-    margin-bottom: 1.5rem;
-}
-
+/* General Form Group Styling */
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--spacing-lg);
     position: relative;
 }
 
@@ -1189,79 +654,117 @@ body {
     display: block;
     color: var(--farm-green-700);
     font-weight: 600;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+    /* Smaller label */
 }
 
+/* Input fields */
 .input-icon-wrapper {
+    /* For icons inside inputs */
     position: relative;
 }
 
 .input-icon {
+    /* Icon itself */
     position: absolute;
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--farm-green-500);
-    font-size: 1.2rem;
+    color: var(--farm-green-300);
+    /* Lighter icon color */
+    font-size: 1.1rem;
+    /* Adjust icon size */
+    pointer-events: none;
+    /* Prevent icon interfering with input */
 }
 
-.form-group input[type="text"],
-.form-group input[type="password"],
-.form-group input[type="email"] {
+/* Base input, textarea, select styles */
+.form-control {
+    display: block;
+    /* Make it block */
     width: 100%;
-    padding: 0.9rem 1rem 0.9rem 2.8rem;
-    border: 2px solid var(--farm-green-100);
-    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    /* Base padding */
+    border: 1px solid var(--farm-neutral-200);
+    /* Consistent border */
+    border-radius: var(--border-radius-md);
     font-size: 1rem;
-    transition: all 0.3s ease;
+    font-family: var(--font-primary);
+    transition: all 0.2s ease-in-out;
     background-color: white;
+    color: var(--farm-neutral-900);
+    line-height: 1.5;
+    /* Ensure consistent line height */
 }
 
-.form-group input:focus {
+.form-control:focus {
+    outline: none;
     border-color: var(--farm-green-500);
     box-shadow: 0 0 0 3px rgba(104, 158, 56, 0.15);
-    outline: none;
+    /* Focus ring */
 }
 
-.form-group input::placeholder {
-    color: #aaa;
+.form-control::placeholder {
+    color: var(--farm-neutral-700);
+    opacity: 0.8;
 }
 
-/* Remember me & Forgot Password */
-.remember-me {
+/* Input with icon */
+.input-icon-wrapper .form-control {
+    padding-left: 2.8rem;
+    /* Make space for icon */
+}
+
+/* Textarea */
+textarea.form-control {
+    min-height: 120px;
+    /* Default height */
+    resize: vertical;
+    /* Allow vertical resize */
+}
+
+/* Select */
+select.form-control {
+    appearance: none;
+    /* Remove default arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a5ce81' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+    /* Space for custom arrow */
+}
+
+/* Checkbox */
+.checkbox-group {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-}
-
-.remember-me label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--farm-green-600);
+    gap: var(--spacing-sm);
     cursor: pointer;
 }
 
-.remember-me input[type="checkbox"] {
+.checkbox-group input[type="checkbox"] {
     appearance: none;
     width: 18px;
     height: 18px;
     border: 2px solid var(--farm-green-300);
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     position: relative;
     cursor: pointer;
     transition: all 0.2s ease;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    margin: 0;
+    /* Reset margin */
 }
 
-.remember-me input[type="checkbox"]:checked {
+.checkbox-group input[type="checkbox"]:checked {
     background-color: var(--farm-green-500);
     border-color: var(--farm-green-500);
 }
 
-.remember-me input[type="checkbox"]:checked:after {
+.checkbox-group input[type="checkbox"]:checked:after {
     content: '';
     position: absolute;
     left: 5px;
@@ -1273,164 +776,872 @@ body {
     transform: rotate(45deg);
 }
 
-.forgot-password {
-    color: var(--farm-green-500);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.forgot-password:hover {
-    color: var(--farm-green-700);
-    text-decoration: underline;
-}
-
-/* Buttons */
-.button-group {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.btn {
-    font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
+.checkbox-group label {
+    /* Label next to checkbox */
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--farm-neutral-700);
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    position: relative;
-    overflow: hidden;
 }
 
-.btn-primary {
-    background-color: var(--farm-green-600);
-    color: white;
-    box-shadow: 0 2px 8px rgba(82, 132, 45, 0.3);
-}
-
-.btn-primary:hover {
-    background-color: var(--farm-green-700);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(82, 132, 45, 0.4);
-}
-
-.btn-primary:active {
-    transform: translateY(0);
-}
-
-.btn-primary:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-image: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.btn-primary:hover:after {
-    opacity: 1;
-}
-
-.btn-disabled {
-    background-color: #bbb;
-    color: #eee;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-.btn-disabled:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-/* Error Messages */
-.error-message {
-    background-color: var(--farm-red-50);
-    border-left: 4px solid var(--farm-red-500);
-    color: var(--farm-red-600);
-    padding: 1rem;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+/* Form Specific Layouts */
+.remember-me {
+    /* Combined checkbox and link */
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.9rem;
 }
 
-.error-message:before {
-    content: '⚠️';
-    margin-right: 0.5rem;
-    font-size: 1.1rem;
+.forgot-password {
+    /* Link style */
+    color: var(--farm-green-600);
+    font-weight: 500;
 }
 
-/* Form Footer */
+.button-group,
+.form-actions {
+    /* Center buttons in forms / Job apply actions */
+    margin-top: var(--spacing-xl);
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    /* Default to center */
+}
+
 .form-footer {
+    /* Text below form */
     text-align: center;
-    margin-top: 1.5rem;
-    color: var(--farm-green-700);
-    padding: 1rem 0;
-    border-top: 1px solid var(--farm-green-100);
+    margin-top: var(--spacing-xl);
+    color: var(--farm-neutral-700);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--farm-neutral-100);
+    font-size: 0.9rem;
 }
 
 .form-footer a {
     color: var(--farm-green-600);
     font-weight: 600;
+}
+
+/* Error Message */
+.error-message {
+    background-color: var(--farm-red-50);
+    border: 1px solid var(--farm-red-100);
+    border-left: 4px solid var(--farm-red-500);
+    color: var(--farm-red-600);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.error-message::before {
+    /* Optional icon */
+    content: '⚠️';
+    font-size: 1.1rem;
+}
+
+/* Status Message (Success/Info) - Renamed to match JS usage */
+.farm-status-message {
+    background-color: var(--farm-green-50);
+    border: 1px solid var(--farm-green-100);
+    border-left: 4px solid var(--farm-green-500);
+    color: var(--farm-green-700);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    margin: var(--spacing-lg) 0;
+    /* Spacing above/below */
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.farm-status-message::before {
+    /* Optional icon */
+    content: '✅';
+    font-size: 1.1rem;
+}
+
+
+/* ======================================== */
+/*          Job Details Specifics           */
+/* ======================================== */
+/* Base Card Styling */
+.card {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 1px solid var(--farm-neutral-100);
+    position: relative;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.card::before {
+    /* Top accent border */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    /* Default gradient, override per card type */
+    background: linear-gradient(to right, var(--farm-green-400), var(--farm-amber-400));
+}
+
+/* Main Job Card */
+.farm-job-card {
+    /* Inherits from .card */
+    border-color: var(--farm-green-100);
+    /* Subtle border */
+}
+
+.farm-job-card::before {
+    /* Accent border */
+    background: linear-gradient(to right, var(--farm-green-500), var(--farm-amber-500));
+}
+
+/* Card Header */
+.card-header {
+    padding: var(--spacing-xl);
+    border-bottom: 1px solid var(--farm-neutral-100);
+    position: relative;
+    overflow: hidden;
+    /* Default header background */
+    background: linear-gradient(135deg, var(--farm-neutral-50), white);
+}
+
+/* Job Card Header */
+.farm-job-header {
+    /* Extends .card-header */
+    background: linear-gradient(135deg, var(--farm-green-50), var(--farm-amber-50));
+    border-color: var(--farm-green-100);
+    /* Match card border */
+}
+
+/* Pattern overlay for headers (optional, subtle) */
+.card-header::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 150px;
+    height: 150px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' fill='none'%3E%3Cpath d='M80 40C80 40 70 50 50 50C30 50 20 40 20 40' stroke='%236a9e3f' stroke-width='1' stroke-opacity='0.08' stroke-linecap='round'/%3E%3Cpath d='M85 50C85 50 70 65 50 65C30 65 15 50 15 50' stroke='%236a9e3f' stroke-width='1' stroke-opacity='0.08' stroke-linecap='round'/%3E%3Cpath d='M90 60C90 60 70 80 50 80C30 80 10 60 10 60' stroke='%236a9e3f' stroke-width='1' stroke-opacity='0.08' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.farm-job-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.farm-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    /* Adjusted padding */
+    border-radius: var(--border-radius-pill);
+    font-size: 0.8rem;
+    /* Smaller badge text */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+}
+
+.farm-badge.job-type {
+    background-color: var(--farm-amber-100);
+    color: var(--farm-amber-800);
+    border-color: var(--farm-amber-200);
+}
+
+.farm-badge.job-date {
+    background-color: var(--farm-green-100);
+    color: var(--farm-green-800);
+    border-color: var(--farm-green-200);
+}
+
+.farm-job-title {
+    font-family: var(--font-display);
+    /* Use display font */
+    color: var(--farm-green-800);
+    /* Darker title */
+    font-size: 2.2rem;
+    /* Adjusted size */
+    font-weight: 700;
+    margin: 0 0 var(--spacing-lg) 0;
+    line-height: 1.2;
+}
+
+.farm-job-meta {
+    /* Company, location, salary wrapper in header */
+    display: flex;
+    flex-direction: column;
+    /* Stack on mobile */
+    gap: var(--spacing-md);
+    background-color: rgba(255, 255, 255, 0.6);
+    /* Semi-transparent bg */
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--farm-green-100);
+}
+
+@media (min-width: 768px) {
+    .farm-job-meta {
+        flex-direction: row;
+        /* Side-by-side on larger screens */
+        flex-wrap: wrap;
+        /* Allow wrapping if needed */
+        gap: var(--spacing-xl);
+    }
+}
+
+/* Individual Meta Items */
+.farm-job-company,
+.farm-job-location,
+.farm-job-salary {
+    display: flex;
+    align-items: center;
+    color: var(--farm-green-800);
+    font-size: 1rem;
+    font-weight: 500;
+    gap: var(--spacing-sm);
+    /* Space between icon and text */
+}
+
+/* Base class for icons within meta sections & section titles */
+.meta-icon,
+.section-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    /* Standard icon size */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    opacity: 0.8;
+    /* Slightly muted icons */
+    vertical-align: middle;
+    /* Align with text */
+}
+
+/* Specific Meta Icons */
+.icon-company {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23406126' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+}
+
+.icon-location {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23406126' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+}
+
+.icon-salary {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23406126' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='1' x2='12' y2='23'/%3E%3Cpath d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/%3E%3C/svg%3E");
+}
+
+.icon-calendar {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23406126' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+}
+
+.icon-sun {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1c40f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E");
+    opacity: 1;
+}
+
+/* Sun brighter */
+.icon-leaf {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23558032' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 13c0 4.4-3.6 8-8 8s-8-3.6-8-8c0-4.4 3.6-8 8-8 3.5 0 6.5 2.2 7.6 5.3'/%3E%3Cpath d='M17.6 8.3C16.5 5.2 13.5 3 10 3 5.6 3 2 6.6 2 11c0 1.9.6 3.6 1.7 5'/%3E%3Cpath d='M12 18c-1.2 0-2.3-.2-3.3-.6'/%3E%3Cpath d='M12 5V2'/%3E%3Cpath d='M15 7c1.7 0 3 1.3 3 3v1'/%3E%3C/svg%3E");
+}
+
+.icon-rain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231474bc' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 17a4.5 4.5 0 0 0-9 0H7a4.5 4.5 0 0 0-7 3.7c.4.1 1 .2 1.5.2 3.6 0 6.5-2.9 6.5-6.5S8.1 8 4.5 8c-.4 0-.9 0-1.3.1A7.5 7.5 0 0 1 18 9.5c0 4.1-3.4 7.5-7.5 7.5h-1.5'/%3E%3Cpath d='M8 14v1M12 14v1M16 14v1'/%3E%3C/svg%3E");
+    opacity: 1;
+}
+
+/* Rain icon */
+.icon-document {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23604e06' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
+}
+
+/* Document icon */
+
+/* Job Content Sections */
+.farm-job-section {
+    padding: var(--spacing-xl);
+    position: relative;
+    background-color: white;
+    /* Ensure sections have white BG */
+}
+
+/* Remove top padding for the first section after the header */
+.farm-job-header+.farm-job-section {
+    padding-top: var(--spacing-xl);
+}
+
+.section-title {
+    /* Reusable title for sections (h3 in JSX) */
+    color: var(--farm-green-700);
+    /* Consistent heading color */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 var(--spacing-lg) 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    /* Space between icon and text */
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--farm-green-100);
+}
+
+.section-title .section-icon {
+    /* Style the icon within the title */
+    width: 24px;
+    height: 24px;
+    /* Slightly larger icon for titles */
+    opacity: 0.9;
+}
+
+.farm-job-description {
+    color: var(--farm-neutral-900);
+    /* Use main text color */
+    line-height: 1.8;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.farm-job-description p:last-child {
+    margin-bottom: 0;
+    /* Remove margin from last paragraph */
+}
+
+.farm-divider {
+    /* Simple horizontal rule */
+    height: 1px;
+    background-color: var(--farm-neutral-100);
+    border: none;
+    margin: 0;
+    /* Remove default margin, controlled by section padding */
+}
+
+/* Requirements / Benefits Lists */
+.styled-list {
+    /* Base class for these lists */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.styled-list li {
+    position: relative;
+    padding-left: 2rem;
+    /* Space for icon */
+    margin-bottom: var(--spacing-md);
+    color: var(--farm-neutral-900);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.styled-list li:last-child {
+    margin-bottom: 0;
+    /* Remove margin from last item */
+}
+
+.styled-list li::before {
+    /* Base pseudo-element for icon */
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.4em;
+    /* Adjust vertical alignment */
+    width: 18px;
+    height: 18px;
+    /* Consistent icon size */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* Specific list icons */
+.farm-requirements-list li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23558032' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+}
+
+.farm-benefits-list li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1c40f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E");
+}
+
+/* Job Footer */
+.farm-job-footer {
+    display: flex;
+    flex-direction: column;
+    /* Stack on mobile */
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: var(--farm-neutral-50);
+    /* Simpler footer bg */
+    border-top: 1px solid var(--farm-neutral-100);
+}
+
+@media (min-width: 768px) {
+    .farm-job-footer {
+        flex-direction: row;
+        /* Side-by-side on larger screens */
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.farm-job-deadline {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    /* Space between icon and text */
+    color: var(--farm-green-800);
+    font-size: 0.95rem;
+    font-weight: 500;
+    background-color: var(--farm-green-50);
+    /* Subtle bg */
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--farm-green-100);
+}
+
+.farm-job-deadline .meta-icon {
+    /* Adjust icon style if needed */
+    opacity: 1;
+    /* Make calendar icon clearer */
+}
+
+.farm-job-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    /* Allow buttons to wrap on small screens if needed */
+}
+
+
+/* ======================================== */
+/*          Sidebar Cards (Company/Apply)   */
+/* ======================================== */
+/* Sidebar cards inherit from base .card */
+.farm-company-card {
+    border-color: var(--farm-green-100);
+}
+
+.farm-company-card::before {
+    background: linear-gradient(to right, var(--farm-green-500), var(--farm-green-400));
+}
+
+.farm-application-card {
+    border-color: var(--farm-amber-200);
+}
+
+.farm-application-card::before {
+    background: linear-gradient(to right, var(--farm-amber-500), var(--farm-amber-400));
+}
+
+/* Sidebar Card Headers */
+.farm-company-header {
+    /* Extends .card-header */
+    background: linear-gradient(135deg, var(--farm-green-50), white);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    /* Consistent padding */
+    border-bottom: 1px solid var(--farm-green-100);
+}
+
+.farm-application-header {
+    /* Extends .card-header */
+    background: linear-gradient(135deg, var(--farm-amber-50), white);
+    border-color: var(--farm-amber-100);
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--farm-amber-100);
+}
+
+.farm-company-logo {
+    width: 60px;
+    height: 60px;
+    /* Logo size */
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    background-color: white;
+    padding: var(--spacing-xs);
+    border: 1px solid var(--farm-neutral-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+
+.farm-company-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.farm-company-header div,
+/* Wrapper for text next to logo */
+.farm-application-header {
+    /* Apply styles directly to header */
+    flex-grow: 1;
+    /* Allow text to take remaining space */
+}
+
+.farm-company-header h3,
+.farm-application-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem 0;
+    /* Adjust margin */
+    color: var(--farm-green-800);
+    /* Default color */
+}
+
+.farm-company-header p,
+.farm-application-header p {
+    color: var(--farm-neutral-700);
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    /* Adjust line height */
+}
+
+.farm-application-header h3 {
+    color: var(--farm-amber-800);
+}
+
+.farm-application-header p {
+    color: var(--farm-amber-700);
+}
+
+/* Sidebar Card Content */
+/* Apply general padding within the card, outside the header */
+.farm-company-content,
+.farm-application-form,
+/* Apply padding to form wrapper */
+.farm-resources-content {
+    /* Content area for resources */
+    padding: var(--spacing-lg);
+}
+
+.farm-company-about {
+    background-color: var(--farm-green-50);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--farm-green-100);
+    margin-bottom: var(--spacing-lg);
+}
+
+.farm-company-about h4,
+.farm-company-highlights h4 {
+    color: var(--farm-green-800);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.farm-company-about p {
+    color: var(--farm-neutral-900);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.farm-company-highlights {
+    margin-bottom: var(--spacing-lg);
+    /* Space before Apply button */
+}
+
+.farm-highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    /* Responsive grid */
+    gap: var(--spacing-sm);
+}
+
+.farm-highlight-item {
+    background-color: var(--farm-amber-50);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--farm-amber-100);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.farm-highlight-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.highlight-label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--farm-amber-800);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+.highlight-value {
+    font-size: 0.95rem;
+    color: var(--farm-neutral-900);
+}
+
+/* Application Form within Card */
+.farm-application-form {
+    /* Uses .farm-application-form padding defined above */
+}
+
+/* Ensure form styles apply correctly */
+.farm-application-form .form-group {
+    margin-bottom: var(--spacing-md);
+    /* Slightly less margin in sidebar form */
+}
+
+.farm-application-form .form-control {
+    /* Inherits base .form-control styles */
+}
+
+.farm-application-form .form-actions {
+    margin-top: var(--spacing-lg);
+    /* Adjust spacing before buttons */
+    justify-content: space-between;
+    /* Space out cancel/submit */
+}
+
+.farm-application-form .form-actions .btn {
+    flex-grow: 1;
+    /* Make buttons share space */
+}
+
+@media (max-width: 480px) {
+
+    /* Stack buttons on very small screens */
+    .farm-application-form .form-actions {
+        flex-direction: column;
+    }
+
+    .farm-application-form .form-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Resources Card */
+.farm-resources {
+    /* Inherits from .card */
+    background-color: var(--farm-amber-50);
+    border-color: var(--farm-amber-100);
+}
+
+.farm-resources::before {
+    background: linear-gradient(to right, var(--farm-amber-500), var(--farm-amber-400));
+}
+
+.farm-resources h3 {
+    color: var(--farm-amber-800);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    /* Remove default margin */
+    padding: var(--spacing-lg);
+    /* Add padding to title */
+    border-bottom: 1px solid var(--farm-amber-100);
+}
+
+.farm-resources-list {
+    list-style: none;
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Padding applied by .farm-resources-content wrapper */
+}
+
+.farm-resources-list li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.farm-resources-list li:last-child {
+    margin-bottom: 0;
+}
+
+.farm-resource-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    /* Space for icon */
+    color: var(--farm-amber-700);
     text-decoration: none;
-    transition: color 0.3s ease;
+    padding: 0.75rem var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    background-color: white;
+    border: 1px solid var(--farm-amber-200);
+    transition: all 0.2s ease-in-out;
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
 }
 
-.form-footer a:hover {
-    color: var(--farm-amber-500);
-    text-decoration: underline;
+.farm-resource-link:hover {
+    background-color: var(--farm-amber-100);
+    color: var(--farm-amber-900);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
 }
 
-/* Farm Theme Footer with Icons */
-.farm-theme-footer {
+.farm-resource-link .meta-icon {
+    /* Style icons in resource links */
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+}
+
+
+/* ======================================== */
+/*          Loading / Error States          */
+/* ======================================== */
+.farm-loading,
+.farm-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    /* Adjusted height */
+    padding: var(--spacing-xl);
+    text-align: center;
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-xl) auto;
+    /* Center block */
+    max-width: 600px;
+    /* Limit width */
+}
+
+.farm-loading {
+    color: var(--farm-green-700);
+    /* Simplified loading background */
+}
+
+.tractor-loader {
+    /* Using the icon directly */
+    width: 60px;
+    height: 60px;
+    margin-bottom: var(--spacing-md);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a9e3f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 4h9l1 7M4 11h4'/%3E%3Ccircle cx='7' cy='15' r='2'/%3E%3Cpath d='M16 15h3a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4h-3v8Z'/%3E%3Ccircle cx='17' cy='15' r='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: bounce 1s infinite alternate;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+.farm-loading p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--farm-green-700);
+}
+
+.farm-error {
+    background-color: var(--farm-red-50);
+    border: 1px solid var(--farm-red-100);
+    box-shadow: var(--shadow-sm);
+}
+
+.error-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: var(--spacing-md);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bc4444' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.farm-error p {
+    color: var(--farm-red-600);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-lg);
+    /* Add space before button */
+}
+
+.farm-error .btn {
+    /* Style button in error state */
+    margin-top: var(--spacing-md);
+}
+
+
+/* ======================================== */
+/*              Footer                      */
+/* ======================================== */
+.site-footer {
+    /* Example simple footer */
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    margin-top: var(--spacing-xxl);
+    border-top: 1px solid var(--farm-neutral-100);
+    background-color: white;
+    color: var(--farm-neutral-700);
+    font-size: 0.9rem;
+}
+
+.farm-theme-footer-icons {
+    /* Icons previously in form footer */
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
-    gap: 2rem;
+    margin-top: var(--spacing-md);
+    gap: var(--spacing-xl);
 }
 
 .farm-icon {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
+    /* Smaller footer icons */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.7;
+    opacity: 0.6;
     transition: all 0.3s ease;
 }
 
 .farm-icon:hover {
     opacity: 1;
-    transform: translateY(-3px);
+    transform: scale(1.1);
 }
 
 .tractor {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2352842d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 15h.01'/%3E%3Crect x='15' y='15' width='2' height='2' rx='1'/%3E%3Cpath d='M5 13V7l4-2 3 2v6'/%3E%3Cpath d='M9 9h0'/%3E%3Cpath d='M9 5h0'/%3E%3Cpath d='M14 5h2c2 0 3 1 3 3v4'/%3E%3Cpath d='M19 10v2a3 3 0 0 1-3 3h-.5a3 3 0 0 1-3-3v-1a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1.5C3 14.36 4.64 16 7 16h11c2.21 0 4-1.79 4-4V5'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2352842d' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 15h.01'/%3E%3Crect x='15' y='15' width='2' height='2' rx='1'/%3E%3Cpath d='M5 13V7l4-2 3 2v6'/%3E%3Cpath d='M9 9h0'/%3E%3Cpath d='M9 5h0'/%3E%3Cpath d='M14 5h2c2 0 3 1 3 3v4'/%3E%3Cpath d='M19 10v2a3 3 0 0 1-3 3h-.5a3 3 0 0 1-3-3v-1a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1.5C3 14.36 4.64 16 7 16h11c2.21 0 4-1.79 4-4V5'/%3E%3C/svg%3E");
 }
 
 .wheat {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffc633' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 22 12 2l10 20'/%3E%3Cpath d='M8 15c0-9.3 4-10 4-10'/%3E%3Cpath d='M16 15c0-10-4-10-4-10'/%3E%3Cpath d='M12 9v13'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c19d0c' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 22 12 2l10 20'/%3E%3Cpath d='M8 15c0-9.3 4-10 4-10'/%3E%3Cpath d='M16 15c0-10-4-10-4-10'/%3E%3Cpath d='M12 9v13'/%3E%3C/svg%3E");
 }
 
 .sun {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffae00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1c40f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E");
 }
 
 
-
-
-
-/* Animations */
+/* ======================================== */
+/*              Animations                  */
+/* ======================================== */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(15px);
     }
 
     to {
@@ -1439,28 +1650,127 @@ body {
     }
 }
 
-.form-container {
-    animation: fadeIn 0.5s ease-out forwards;
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+
+    /* Reduced bounce */
 }
 
-/* Media Queries */
-@media (max-width: 576px) {
-    .form-container {
-        max-width: 90%;
-        padding: 2rem 1.5rem;
+/* ======================================== */
+/*              Media Queries               */
+/* ======================================== */
+@media (max-width: 991px) {
+    /* Adjusted breakpoint to match grid change */
+    /* Stack sidebar below main content */
+    /* Grid handles this automatically by setting to 1fr */
+
+    /* Example: Adjust padding on job details page for smaller screens */
+    .farm-job-details {
+        padding: var(--spacing-lg) 0;
     }
 
-    .form-container h2 {
-        font-size: 1.75rem;
+    .farm-job-container {
+        padding: 0 var(--spacing-sm);
     }
 
+    .farm-job-card .card-header,
+    .farm-job-card .farm-job-section,
+    .farm-job-card .farm-job-footer {
+        padding-left: var(--spacing-lg);
+        padding-right: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Header Mobile */
+    .nav {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: block;
+    }
+
+    /* TODO: Add styles for the mobile navigation menu itself when toggled */
+
+    /* Job Details Footer Actions */
+    .farm-job-footer {
+        flex-direction: column;
+        align-items: stretch;
+        /* Stretch items full width */
+    }
+
+    .farm-job-actions {
+        flex-direction: column;
+        /* Stack buttons */
+        width: 100%;
+    }
+
+    .farm-job-actions .btn {
+        width: 100%;
+        /* Make buttons full width */
+    }
+
+    /* Form Layout */
     .remember-me {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.75rem;
     }
 
-    .farm-theme-footer {
-        gap: 1.5rem;
+    .form-actions:not(.farm-application-form .form-actions) {
+        /* Exclude sidebar form actions */
+        flex-direction: column;
+    }
+
+    .form-actions:not(.farm-application-form .form-actions) .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    .form-container {
+        max-width: 95%;
+        /* Allow slightly more width */
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    .farm-theme-footer-icons {
+        gap: var(--spacing-lg);
+    }
+
+    /* Adjust job card padding for very small screens */
+    .farm-job-card .card-header,
+    .farm-job-card .farm-job-section,
+    .farm-job-card .farm-job-footer {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+
+    .farm-job-title {
+        font-size: 1.8rem;
+    }
+
+    .farm-job-meta {
+        padding: var(--spacing-sm);
     }
 }

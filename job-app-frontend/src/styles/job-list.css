@@ -1,19 +1,58 @@
 /* src/styles/job-list.css */
-/* Import farm theme variables without affecting other components */
+
+/* --- Theme Import --- */
 @import url('./farm-theme.css');
 
-/* Isolated JobList styles with specific class names */
+/* --- Base & Typography --- */
+body {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    background-color: #f9fafb;
+    /* Use a slightly warmer off-white */
+    color: var(--farm-gray-700, #374151);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes farm-fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes farm-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Main Container --- */
 .farm-joblist-container {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 3.5rem auto;
     padding: 0 1.5rem;
     position: relative;
-    background-color: #fafbf7;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-    padding: 2.5rem;
+    /* CHANGE: Use a very light background for the container */
+    background-color: var(--farm-green-50, #f1f5eb);
+    /* << CHANGED FROM #ffffff */
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(82, 132, 45, 0.06),
+        0 1px 3px rgba(0, 0, 0, 0.04);
+    padding: 3rem 3.5rem;
     overflow: hidden;
 }
+
 
 .farm-joblist-container::before {
     content: '';
@@ -21,145 +60,212 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 8px;
-    background: linear-gradient(to right, var(--farm-green-500), var(--farm-amber-400));
-    border-radius: 8px 8px 0 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--farm-amber-500, #f59e0b), var(--farm-green-500, #52842d), var(--farm-green-600, #3f6724));
+    border-radius: 16px 16px 0 0;
+    z-index: 1;
+    /* Ensure it's above potential background elements */
 }
 
-/* Page Header */
+/* --- Page Header --- */
 .farm-joblist-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
+    /* Increased spacing */
     position: relative;
     padding-bottom: 1.5rem;
+    animation: farm-fade-in-up 0.6s ease-out forwards;
+    /* Entrance animation */
 }
 
 .farm-joblist-header h2 {
     font-family: var(--font-display, 'Roboto Slab', serif);
-    color: var(--farm-green-700);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    color: var(--farm-green-800, #2e4b18);
+    font-size: 2.8rem;
+    /* Fine-tuned size */
+    font-weight: 700;
+    margin-bottom: 0.8rem;
     position: relative;
     display: inline-block;
+    letter-spacing: -0.5px;
+    transform-origin: bottom center;
 }
 
+/* Animated underline */
 .farm-joblist-header h2::after {
     content: '';
     position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--farm-amber-400);
-    border-radius: 2px;
+    bottom: -15px;
+    left: 0;
+    /* Start from left */
+    width: 100%;
+    /* Full width initially */
+    height: 4px;
+    background-color: var(--farm-amber-500, #f59e0b);
+    border-radius: 3px;
+    transform: scaleX(0.6);
+    /* Start smaller */
+    transform-origin: center;
+    /* Scale from center */
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* Elastic transition */
+    opacity: 0.8;
+}
+
+.farm-joblist-header:hover h2::after {
+    transform: scaleX(0.9);
+    /* Expand slightly on header hover */
 }
 
 .farm-joblist-header p {
-    color: var(--farm-green-600);
-    font-size: 1.15rem;
-    font-weight: 500;
+    color: var(--farm-green-700, #3f6724);
+    font-size: 1.2rem;
+    font-weight: 400;
+    max-width: 650px;
+    margin: 0.5rem auto 0;
+    /* Adjusted margin */
+    line-height: 1.7;
 }
 
-/* Filter Section */
+/* --- Filter Section --- */
 .farm-filter-section {
-    background-color: white;
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border: 1px solid var(--farm-green-100);
-    box-shadow: 0 4px 12px rgba(82, 132, 45, 0.08);
+    background-color: #f8fafc;
+    /* Keep light background */
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    /* Adjusted padding */
+    margin-bottom: 3rem;
+    /* Increased spacing */
+    border: 1px solid var(--farm-green-100, #e5eadf);
     position: relative;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: farm-fade-in-up 0.6s 0.1s ease-out forwards;
+    /* Delayed animation */
+    /* Add subtle inner border highlight */
+    box-shadow: inset 0 1px 2px rgba(82, 132, 45, 0.03);
 }
 
-.farm-filter-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 100%;
-    background-color: var(--farm-green-400);
-    border-radius: 10px 0 0 10px;
+.farm-filter-section:focus-within {
+    border-color: var(--farm-green-300, #9bc07c);
+    box-shadow: 0 4px 15px rgba(82, 132, 45, 0.08),
+        inset 0 1px 2px rgba(82, 132, 45, 0.03);
 }
 
 .farm-filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: center;
-}
-
-.farm-filter-group {
-    flex: 1;
-    min-width: 200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* Slightly wider min */
+    gap: 1.75rem;
+    /* Increased gap */
+    align-items: end;
 }
 
 .farm-filter-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    color: var(--farm-green-700);
+    margin-bottom: 0.6rem;
+    color: var(--farm-green-800, #2e4b18);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    /* Increased letter spacing */
+    cursor: pointer;
+    /* Indicate clickable label */
 }
 
+/* Input & Select Common Styles */
 .farm-filter-select,
 .farm-filter-input {
     width: 100%;
-    padding: 0.85rem 1rem;
-    border: 2px solid var(--farm-green-100);
+    padding: 0.85rem 1.2rem;
+    /* Adjusted padding */
+    border: 1px solid var(--farm-green-200, #c7d6b8);
     border-radius: 8px;
     font-size: 1rem;
     background-color: white;
-    transition: all 0.3s ease;
-    color: var(--farm-green-800);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    color: var(--farm-green-900, #1c300f);
+    appearance: none;
+    /* Add subtle inset shadow */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+    will-change: border-color, box-shadow;
+    /* Hint browser about changes */
 }
 
 .farm-filter-select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2352842d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%233f6724' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    /* Use original SVG */
     background-repeat: no-repeat;
     background-position: right 1rem center;
-    padding-right: 2.5rem;
+    padding-right: 3.5rem;
+    /* More space for arrow */
+    cursor: pointer;
+}
+
+/* Hover & Focus States */
+.farm-filter-select:hover,
+.farm-filter-input:hover {
+    border-color: var(--farm-green-400, #77a650);
+    /* background-color: #fdfefc; */
+    /* Very subtle bg change */
 }
 
 .farm-filter-select:focus,
 .farm-filter-input:focus {
-    border-color: var(--farm-green-500);
-    box-shadow: 0 0 0 4px rgba(82, 132, 45, 0.1);
+    border-color: var(--farm-green-500, #52842d);
+    box-shadow: 0 0 0 3px rgba(82, 132, 45, 0.15),
+        /* Outer glow */
+        inset 0 1px 3px rgba(0, 0, 0, 0.04);
+    /* Keep inset */
     outline: none;
+    background-color: white;
+    /* Ensure background stays white on focus */
 }
 
-.farm-filter-select:hover,
-.farm-filter-input:hover {
-    border-color: var(--farm-green-300);
-}
-
-/* Job Grid */
 .farm-job-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3.5rem;
 }
 
 .farm-job-card {
     background-color: white;
-    border-radius: 10px;
+    /* << KEEP CARDS WHITE for contrast */
+    border-radius: 20px;
     padding: 1.75rem;
-    transition: all 0.3s ease;
-    border: 1px solid #e5eadf;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    /* Slightly adjust border for visibility against light green */
+    border: 1px solid var(--farm-green-100, #e0e7dc);
+    /* Slightly adjust if needed */
+    box-shadow: 0 4px 10px rgba(82, 132, 45, 0.05);
+    /* Shadow now more effective */
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    will-change: transform, box-shadow;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: farm-fade-in-up 0.5s ease-out forwards;
 }
+
+/* NEW RULE: Hide job cards starting from the 4th child */
+.farm-job-grid .farm-job-card:nth-child(n+4) {
+    display: none;
+    /* This visually hides the 4th, 5th, etc., job cards */
+}
+
 
 .farm-job-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(82, 132, 45, 0.12);
-    border-color: var(--farm-green-200);
+    box-shadow: 0 10px 25px rgba(82, 132, 45, 0.1);
+    border-color: var(--farm-green-300, #9bc07c);
 }
 
+/* Card Top Accent - Scale Animation */
 .farm-job-card::before {
     content: '';
     position: absolute;
@@ -167,86 +273,123 @@
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(to right, var(--farm-amber-400), var(--farm-green-500));
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    background: linear-gradient(90deg, var(--farm-amber-400, #fbbf24), var(--farm-green-500, #52842d));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    /* Ensure accent respects rounded corners (optional, usually covered by overflow:hidden) */
+    /* border-radius: 20px 20px 0 0; */
 }
 
 .farm-job-card:hover::before {
-    opacity: 1;
+    transform: scaleX(1);
+}
+
+
+/* Card Content Structure */
+.farm-job-card-content {
+    flex-grow: 1;
+    /* Allow content to fill space */
+    display: flex;
+    flex-direction: column;
 }
 
 .farm-job-card h3 {
-    color: var(--farm-green-700);
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
+    color: var(--farm-green-800, #2e4b18);
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    /* Tighter spacing */
+    line-height: 1.45;
     font-weight: 600;
+    /* Prevent long titles breaking layout (optional) */
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+    transition: color 0.3s ease;
 }
 
-.farm-job-location {
-    display: flex;
-    align-items: center;
-    color: var(--farm-green-600);
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+.farm-job-card:hover h3 {
+    color: var(--farm-green-900, #1c300f);
+    /* Darken title on card hover */
 }
 
-.farm-job-location::before {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 0.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2352842d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'%3E%3C/path%3E%3Ccircle cx='12' cy='10' r='3'%3E%3C/circle%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.farm-job-salary {
-    color: var(--farm-amber-700);
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-}
-
-.farm-job-salary::before {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 0.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b45309' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='1' x2='12' y2='23'%3E%3C/line%3E%3Cpath d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'%3E%3C/path%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.farm-job-company {
-    color: var(--farm-green-500);
-    font-size: 0.95rem;
+.farm-job-meta {
     margin-bottom: 1.25rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
+    /* No flex-grow needed here if card-content handles it */
 }
 
+.farm-job-location,
+.farm-job-salary,
+.farm-job-company {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+    /* Consistent spacing */
+    color: var(--farm-green-700, #3f6724);
+    transition: color 0.3s ease;
+}
+
+/* Meta Icons */
+.farm-job-location::before,
+.farm-job-salary::before,
 .farm-job-company::before {
     content: '';
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 0.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2352842d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'%3E%3C/path%3E%3Cpolyline points='9 22 9 12 15 12 15 22'%3E%3C/polyline%3E%3C/svg%3E");
+    width: 18px;
+    height: 18px;
+    margin-right: 0.75rem;
     background-size: contain;
     background-repeat: no-repeat;
+    flex-shrink: 0;
+    opacity: 0.75;
+    /* Slightly faded icons */
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Bring icons slightly more to life on hover */
+.farm-job-card:hover .farm-job-location::before,
+.farm-job-card:hover .farm-job-salary::before,
+.farm-job-card:hover .farm-job-company::before {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Icon SVGs (Use full original URLs) */
+.farm-job-location::before {
+    background-image: url("data:image/svg+xml,...");
+}
+
+.farm-job-salary {
+    color: var(--farm-amber-700, #b45309);
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.farm-job-salary::before {
+    background-image: url("data:image/svg+xml,...stroke='%23b45309'...");
+}
+
+/* Ensure stroke matches */
+.farm-job-company {
+    color: var(--farm-green-600, #52842d);
+    font-weight: 500;
+}
+
+.farm-job-company::before {
+    background-image: url("data:image/svg+xml,...");
+}
+
+/* Job Actions / Button Area */
 .farm-job-actions {
-    margin-top: 1rem;
+    margin-top: auto;
+    /* Push to bottom */
+    padding-top: 1rem;
+    border-top: 1px solid var(--farm-green-50, #f1f5eb);
+    /* Very subtle separator */
 }
 
+/* --- Buttons --- */
 .farm-btn {
     display: inline-block;
     font-weight: 600;
@@ -254,126 +397,200 @@
     white-space: nowrap;
     vertical-align: middle;
     user-select: none;
-    border: 2px solid transparent;
-    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    padding: 0.8rem 1.6rem;
+    /* Adjusted padding */
     font-size: 0.95rem;
     line-height: 1.5;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Use matching ease */
     cursor: pointer;
     text-decoration: none;
+    will-change: transform, box-shadow, background-color, border-color;
+    /* Performance hint */
 }
 
 .farm-btn-info {
     color: white;
-    background-color: var(--farm-green-600);
-    border-color: var(--farm-green-600);
+    background-color: var(--farm-green-600, #3f6724);
+    border-color: var(--farm-green-600, #3f6724);
     width: 100%;
-    display: block;
-    text-align: center;
+    display: flex;
+    /* Use flex for potential icon alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    /* Space for potential icon */
+    box-shadow: 0 3px 6px rgba(82, 132, 45, 0.15);
 }
 
 .farm-btn-info:hover {
-    background-color: var(--farm-green-700);
-    border-color: var(--farm-green-700);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(82, 132, 45, 0.25);
+    background-color: var(--farm-green-700, #2e4b18);
+    border-color: var(--farm-green-700, #2e4b18);
+    transform: translateY(-3px) scale(1.02);
+    /* Lift and slightly scale */
+    box-shadow: 0 7px 14px rgba(82, 132, 45, 0.2);
 }
 
 .farm-btn-info:active {
-    background-color: var(--farm-green-800);
-    border-color: var(--farm-green-800);
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(82, 132, 45, 0.15);
+    background-color: var(--farm-green-800, #1c300f);
+    border-color: var(--farm-green-800, #1c300f);
+    transform: translateY(0) scale(1);
+    /* Reset transform */
+    box-shadow: 0 2px 4px rgba(82, 132, 45, 0.12);
+    /* Active shadow */
 }
 
-/* Loading and Error States */
+/* Optional: Add an icon to the button */
+/* .farm-btn-info::after {
+    content: '→';
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+.farm-btn-info:hover::after {
+    transform: translateX(3px);
+} */
+
+
+/* --- Loading, Error, No Data States --- */
 .farm-loading,
 .farm-error,
 .farm-no-data {
     text-align: center;
-    padding: 2rem;
-    border-radius: 10px;
-    margin: 2rem 0;
+    padding: 3.5rem 1.5rem;
+    /* Generous padding */
+    border-radius: 12px;
+    margin: 3rem auto;
+    /* Consistent margin */
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    /* Ensure height */
+    animation: farm-fade-in-up 0.5s ease-out forwards;
+    /* Fade in state message */
 }
 
+/* Loading Spinner */
 .farm-loading {
-    background-color: #f8fafc;
-    color: var(--farm-green-600);
+    background-color: var(--farm-green-50, #f1f5eb);
+    /* Light green bg */
+    color: var(--farm-green-700, #3f6724);
     font-weight: 500;
-    border: 1px dashed var(--farm-green-200);
-    position: relative;
-    padding-top: 3.5rem;
+    border: 1px dashed var(--farm-green-200, #c7d6b8);
+
 }
 
 .farm-loading::before {
     content: '';
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-bottom: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border: 5px solid var(--farm-green-100, #e5eadf);
+    border-top-color: var(--farm-green-500, #52842d);
+    border-radius: 50%;
+    animation: farm-spin 0.8s infinite linear;
+    /* Use defined keyframe */
+}
+
+/* Error State */
+.farm-error {
+    background-color: #fff5f5;
+    /* Lighter red background */
+    color: #c53030;
+    /* Darker red text */
+    border: 1px solid #fed7d7;
+    /* Red border */
+    border-left: 5px solid #e53e3e;
+    /* Prominent left border */
+    font-weight: 500;
+}
+
+.farm-error::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%23e53e3e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+/* No Data State */
+.farm-no-data {
+    background-color: #fafafa;
+    /* Very light gray */
+    color: var(--farm-gray-500, #6b7280);
+    font-weight: 500;
+    border: 1px dashed var(--farm-gray-300, #d1d5db);
+}
+
+.farm-no-data::before {
+    content: '';
+    display: block;
     width: 36px;
     height: 36px;
-    border: 4px solid var(--farm-green-100);
-    border-top-color: var(--farm-green-500);
-    border-radius: 50%;
-    animation: farm-spin 1s infinite linear;
+    margin-bottom: 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3Cpath d='M14 11h-3m0 0H8m3 0v-3m0 3v3'%3E%3C/path%3E%3C!-- Simple Search/Magnify Icon --%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.6;
 }
 
-@keyframes farm-spin {
-    from {
-        transform: translateX(-50%) rotate(0deg);
-    }
-
-    to {
-        transform: translateX(-50%) rotate(360deg);
-    }
-}
-
-.farm-error {
-    background-color: #fef2f2;
-    color: #b91c1c;
-    border-left: 4px solid #ef4444;
-}
-
-.farm-no-data {
-    background-color: #f7f7f7;
-    color: #666;
-    font-style: italic;
-    border: 1px dashed #ddd;
-}
-
-/* Farm Resources Section */
+/* --- Farm Resources Section --- */
 .farm-resources-section {
-    background-color: #f1f5eb;
-    border-radius: 10px;
-    padding: 2rem;
-    margin-top: 3rem;
+    background-color: #ffffff;
+    /* << CHANGED FROM --farm-green-50 */
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    margin-top: 4rem;
     position: relative;
-    border: 1px solid var(--farm-green-200);
+    border: 1px solid var(--farm-green-100, #e0e7dc);
+    /* Use same border as cards */
     overflow: hidden;
+    animation: farm-fade-in-up 0.6s 0.2s ease-out forwards;
+    /* Add a subtle shadow to lift it off the container background */
+    box-shadow: 0 4px 10px rgba(82, 132, 45, 0.05);
 }
 
+/* Background Decoration */
 .farm-resources-section::before {
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 150px;
-    height: 150px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='rgba(82, 132, 45, 0.1)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E");
+    bottom: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='rgba(82, 132, 45, 0.08)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3E%3C/path%3E%3C/svg%3E");
+    /* Use original */
     background-repeat: no-repeat;
     background-size: contain;
-    opacity: 0.5;
+    opacity: 0.9;
+    z-index: 0;
+    transform: rotate(-15deg);
+    /* Slight rotation */
+    transition: transform 0.5s ease-out;
+}
+
+.farm-resources-section:hover::before {
+    transform: rotate(-5deg) scale(1.05);
+    /* Animate decoration on hover */
 }
 
 .farm-resources-section h3 {
-    color: var(--farm-green-700);
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    color: var(--farm-green-800, #2e4b18);
+    font-size: 1.6rem;
+    margin-bottom: 1.75rem;
     font-weight: 600;
     position: relative;
-    padding-left: 2rem;
+    padding-left: 2.75rem;
+    /* Increased padding */
+    z-index: 1;
 }
 
 .farm-resources-section h3::before {
@@ -382,32 +599,47 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2352842d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z'%3E%3C/path%3E%3C/svg%3E");
+    width: 28px;
+    height: 28px;
+    background-image: url("data:image/svg+xml,...");
+    /* Use original Phone SVG */
     background-size: contain;
     background-repeat: no-repeat;
+    opacity: 0.9;
+    transition: transform 0.3s ease;
 }
 
+.farm-resources-section:hover h3::before {
+    transform: translateY(-50%) scale(1.1);
+    /* Scale icon on section hover */
+}
+
+/* Resource Links */
 .farm-resource-links {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    position: relative;
+    z-index: 1;
 }
 
 .farm-resource-link {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 1.4rem;
+    /* Adjusted padding */
     background-color: white;
-    border-radius: 30px;
-    color: var(--farm-green-600);
+    border-radius: 50px;
+    /* Pill shape */
+    color: var(--farm-green-700, #3f6724);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
-    transition: all 0.3s ease;
-    border: 1px solid var(--farm-green-100);
-    box-shadow: 0 2px 6px rgba(82, 132, 45, 0.08);
+    border: 1px solid var(--farm-green-200, #c7d6b8);
+    box-shadow: 0 2px 5px rgba(82, 132, 45, 0.07);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Consistent ease */
+    will-change: transform, box-shadow, background-color, border-color;
 }
 
 .farm-resource-link::before {
@@ -416,57 +648,140 @@
     width: 16px;
     height: 16px;
     margin-right: 0.75rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2352842d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'%3E%3C/path%3E%3Cpolyline points='15 3 21 3 21 9'%3E%3C/polyline%3E%3Cline x1='10' y1='14' x2='21' y2='3'%3E%3C/line%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,...");
+    /* Use original External Link SVG */
     background-size: contain;
     background-repeat: no-repeat;
+    opacity: 0.8;
+    transition: transform 0.3s ease;
 }
 
 .farm-resource-link:hover {
-    color: var(--farm-green-700);
-    background-color: #f9fbf7;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(82, 132, 45, 0.15);
-    border-color: var(--farm-green-300);
+    color: var(--farm-green-800, #2e4b18);
+    background-color: #fdfefc;
+    transform: translateY(-3px) scale(1.03);
+    /* Lift and scale */
+    box-shadow: 0 6px 12px rgba(82, 132, 45, 0.12);
+    border-color: var(--farm-green-400, #77a650);
 }
 
-/* Responsive Design */
+.farm-resource-link:hover::before {
+    transform: scale(1.1) rotate(-5deg);
+    /* Scale and slightly rotate icon */
+}
+
+
+/* --- Responsive Design --- */
+
+/* Large Tablets / Small Laptops */
+@media (max-width: 992px) {
+    .farm-joblist-container {
+        padding: 2.5rem;
+    }
+
+    .farm-job-grid {
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
     .farm-joblist-container {
+        padding: 2rem;
+        margin: 2.5rem auto;
+    }
+
+    .farm-joblist-header h2 {
+        font-size: 2.3rem;
+    }
+
+    .farm-joblist-header p {
+        font-size: 1.15rem;
+    }
+
+    .farm-job-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .farm-resources-section {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Large Phones */
+@media (max-width: 576px) {
+    .farm-joblist-container {
+        padding: 2rem 1.25rem;
+        border-radius: 12px;
+    }
+
+    .farm-filter-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .farm-filter-section {
         padding: 1.5rem;
+    }
+
+    .farm-job-card {
+        padding: 1.5rem;
+    }
+
+    .farm-btn {
+        padding: 0.75rem 1.4rem;
+        font-size: 0.9rem;
+    }
+
+    .farm-resources-section h3 {
+        font-size: 1.4rem;
+        padding-left: 2.25rem;
+    }
+
+    .farm-resources-section h3::before {
+        width: 24px;
+        height: 24px;
+    }
+
+    .farm-resource-links {
+        gap: 0.75rem;
+    }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+    .farm-joblist-container {
+        padding: 1.5rem 1rem;
+        margin: 2rem auto;
     }
 
     .farm-joblist-header h2 {
         font-size: 2rem;
     }
 
-    .farm-job-grid {
-        grid-template-columns: 1fr;
+    .farm-joblist-header h2::after {
+        height: 3px;
+        bottom: -12px;
     }
 
-    .farm-resources-section {
-        padding: 1.5rem;
+    .farm-joblist-header p {
+        font-size: 1rem;
     }
 
-    .farm-resource-links {
-        flex-direction: column;
+    .farm-job-card h3 {
+        font-size: 1.2rem;
     }
 
-    .farm-resource-link {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .farm-filter-container {
-        flex-direction: column;
-        gap: 1rem;
+    .farm-job-meta span {
+        font-size: 0.9rem;
     }
 
-    .farm-filter-group {
-        width: 100%;
-    }
-
-    .farm-job-card {
-        padding: 1.25rem;
+    .farm-loading,
+    .farm-error,
+    .farm-no-data {
+        padding: 2.5rem 1rem;
+        min-height: 160px;
+        font-size: 1rem;
     }
 }
