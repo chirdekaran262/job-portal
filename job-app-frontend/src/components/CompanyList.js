@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllCompanies } from '../services/companyService';
 import { Link } from 'react-router-dom';
-import '../styles/components.css'; // You can reuse the styles
+import '../styles/components.css';
 
 const CompanyList = () => {
     const [companies, setCompanies] = useState([]);
@@ -12,10 +12,12 @@ const CompanyList = () => {
         try {
             setLoading(true);
             const data = await getAllCompanies();
-            console.log('Fetched companies:', data); // Debugging line
-            setCompanies(data);
+            // Convert object with numeric keys to array
+            const companiesArray = Object.values(data).filter(item => typeof item === 'object');
+            setCompanies(companiesArray);
             setError(null);
         } catch (err) {
+            console.error('Error fetching companies:', err);
             setError('Failed to fetch companies. Please try again later.');
         } finally {
             setLoading(false);
@@ -43,14 +45,20 @@ const CompanyList = () => {
             {companies.length === 0 ? (
                 <p className="no-data">No companies available at the moment.</p>
             ) : (
-                <div className="job-grid">
+                <div className="company-grid">
                     {companies.map((company) => (
-                        <div key={company.id} className="job-card">
-                            <h3>{company.name}</h3>
-                            <p className="job-location">{company.location}</p>
-                            <p className="job-salary">{company.email}</p>
-                            <div className="job-actions">
-                                <Link to={`/companies/${company.id}`} className="btn btn-info">
+                        <div key={company.id} className="company-card">
+                            <h3 className="company-name">{company.name}</h3>
+                            <p className="company-description">
+                                {company.description || 'No description available'}
+                            </p>
+                            <div className="company-stats">
+                                <span className="reviews-count">
+                                    Reviews: {company.reviews?.length || 0}
+                                </span>
+                            </div>
+                            <div className="company-actions">
+                                <Link to={`/companies/${company.id}`} className="btn btn-primary">
                                     View Details
                                 </Link>
                             </div>

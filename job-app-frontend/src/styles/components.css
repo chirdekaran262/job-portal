@@ -1,23 +1,82 @@
-/* .header {
-    background-color: #0066cc;
-    color: white;
+/* --- Base & Variables --- */
+:root {
+    --primary-color: #556B2F;
+    /* Dark Olive Green - for main elements, headers */
+    --secondary-color: #8B4513;
+    /* Saddle Brown - for accents, secondary buttons */
+    --accent-color: #DAA520;
+    /* Goldenrod - for hover effects, highlights */
+    --light-bg: #F5F5DC;
+    /* Beige - for page background */
+    --card-bg: #fefffd;
+    /* White - for cards */
+    --text-color: #3A3A3A;
+    /* Dark Gray - for body text */
+    --light-text: #FFFFFF;
+    /* White - for text on dark backgrounds */
+    --border-color: #D2B48C;
+    /* Tan - for borders */
+    --danger-color: #A52A2A;
+    /* Brown (instead of bright red) */
+    --info-color: #4682B4;
+    /* Steel Blue (muted) */
+    --warning-color: #B8860B;
+    /* Dark Goldenrod */
+
+    --font-primary: 'Roboto', sans-serif;
+    --font-headings: 'Merriweather', serif;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-headings);
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+/* --- Header --- */
+.header {
+    background-color: var(--primary-color);
+    color: var(--light-text);
     padding: 1rem 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Slightly stronger shadow */
     position: sticky;
     top: 0;
     z-index: 1000;
-} */
+}
 
 .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    /* Added for better layout on wider screens */
+    margin: 0 auto;
+    padding: 0 1rem;
+    /* Padding for container */
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-family: var(--font-headings);
+    font-size: 2rem;
+    /* Slightly larger */
     font-weight: bold;
     margin: 0;
+    color: var(--light-text);
+    text-decoration: none;
 }
 
 .nav {
@@ -27,330 +86,39 @@
 .nav-list {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
+    /* Increased gap */
     margin: 0;
     padding: 0;
 }
 
 .nav-item {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    /* Slightly larger */
 }
 
 .nav-link {
-    color: white;
+    color: var(--light-text);
     text-decoration: none;
     transition: color 0.3s ease;
+    font-weight: 500;
 }
 
 .nav-link:hover {
-    color: #ffcc00;
+    color: var(--accent-color);
+    text-decoration: underline;
 }
 
+/* Re-styling .header h1, assumed to be page title within header sometimes */
 .header h1 {
     margin: 0;
     font-size: 1.5rem;
+    font-family: var(--font-headings);
+    color: var(--light-text);
+    /* Ensure it's visible on dark header */
 }
 
-/* Job List */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.job-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.job-card {
-    background: white;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.job-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.job-card h3 {
-    margin-bottom: 10px;
-    color: #0066cc;
-}
-
-.job-location {
-    color: #6c757d;
-    margin-bottom: 10px;
-}
-
-.job-salary {
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.job-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-    gap: 10px;
-    /* Add this line to create space between buttons */
-}
-
-/* Job Details */
-.detail-card {
-    background: white;
-    border-radius: 5px;
-    padding: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* .detail-card h2 {
-    color: #0066cc;
-    margin-bottom: 20px;
-} */
-
-.detail-item {
-    margin-bottom: 20px;
-}
-
-.detail-item h3 {
-    margin-bottom: 10px;
-}
-
-.label {
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-/* Form */
-.form-container {
-    background: white;
-    border-radius: 5px;
-    padding: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* .form-container h2 {
-    margin-bottom: 20px;
-    color: #0066cc;
-} */
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-/* Buttons */
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-/* .btn-primary {
-    color: #fff;
-    background-color: #0066cc;
-    border-color: #0066cc;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004494;
-} */
-
-.btn-secondary {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
-}
-
-.btn-info {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-}
-
-.btn-info:hover {
-    background-color: #138496;
-    border-color: #117a8b;
-}
-
-.btn-warning {
-    color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-
-.btn-warning:hover {
-    background-color: #e0a800;
-    border-color: #d39e00;
-}
-
-.btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
-
-.btn-disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-}
-
-.apply-status {
-    margin-top: 10px;
-    font-weight: bold;
-    color: green;
-}
-
-.job-section {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 
-.job-section h3 {
-    margin-bottom: 0.5rem;
-    color: #0066cc;
-} */
-
-.dashboard-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-.dashboard-table th,
-.dashboard-table td {
-    border: 1px solid #ddd;
-    padding: 0.75rem;
-    text-align: left;
-}
-
-.dashboard-table th {
-    background-color: #f8f9fa;
-    font-weight: bold;
-}
-
-.dashboard-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Header */
-
-
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0;
-    color: white;
-    text-decoration: none;
-}
-
-.nav {
-    display: flex;
-}
-
-.nav-list {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-item {
-    font-size: 1rem;
-}
-
-.nav-link {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: #ffcc00;
-}
-
-/* Dropdown Menu */
+/* --- Dropdown Menu (in Header) --- */
 .nav-item.dropdown {
     position: relative;
 }
@@ -358,12 +126,23 @@
 .dropdown-button {
     background: none;
     border: none;
-    color: white;
-    font-size: 1rem;
+    color: var(--light-text);
+    font-size: 1.1rem;
+    /* Match nav-item */
+    font-family: var(--font-primary);
+    /* Match nav-item font family */
+    font-weight: 500;
+    /* Match nav-link */
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0;
+    /* Remove default button padding */
+}
+
+.dropdown-button:hover {
+    color: var(--accent-color);
 }
 
 .dropdown-icon {
@@ -375,14 +154,18 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: white;
-    color: #333;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+    /* Slightly more spacing */
     padding: 0.5rem 0;
-    min-width: 150px;
-    z-index: 1000;
+    min-width: 180px;
+    /* Wider */
+    z-index: 1001;
+    /* Ensure above other content */
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
@@ -391,79 +174,489 @@
 
 .dropdown-link {
     display: block;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
+    /* More padding */
     text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s ease;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1rem;
 }
 
 .dropdown-link:hover {
-    background-color: #f8f9fa;
+    background-color: var(--light-bg);
+    color: var(--primary-color);
 }
 
 .logout {
-    color: #dc3545;
+    /* Special styling for logout */
+    color: var(--danger-color);
+    font-weight: bold;
 }
 
 .logout:hover {
     background-color: #f8d7da;
+    /* A light red, keep for emphasis */
+    color: #721c24;
 }
 
-/* Job Details */
+/* --- Page Header (for Job List, etc.) --- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    /* Increased margin */
+    padding-bottom: 15px;
+    /* Padding for bottom border */
+    border-bottom: 2px solid var(--border-color);
+    /* More prominent border */
+}
+
+.page-header h1,
+.page-header h2 {
+    /* Assuming page titles might be h1 or h2 */
+    font-size: 2.2rem;
+    color: var(--primary-color);
+}
+
+/* --- Job List & Cards --- */
+.job-grid,
+.company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    /* Slightly wider min */
+    gap: 25px;
+    /* Increased gap */
+    padding: 20px 0;
+    /* Added vertical padding to section */
+}
+
+.job-card,
+.company-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    /* Slightly more rounded */
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover,
+.company-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.job-card h3,
+.company-name {
+    /* company-name from company-card */
+    margin-top: 0;
+    margin-bottom: 12px;
+    /* color: var(--secondary-color); */
+    color: #2c3e50;
+    /* Using secondary for card titles */
+    font-size: 1.6rem;
+}
+
+.job-location,
+.company-description,
+.company-stats {
+    color: #555;
+    /* A bit darker than default text for secondary info */
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.company-description {
+    line-height: 1.5;
+}
+
+.job-salary {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+}
+
+.job-actions,
+.company-actions {
+    display: flex;
+    justify-content: space-between;
+    /* Keep space-between for two buttons */
+    /* If more buttons, consider flex-start or flex-end and manage spacing */
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* --- Detail Card (Job Details, etc.) --- */
+.detail-card,
 .job-details-container {
+    /* job-details-container similar to detail-card */
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 35px;
+    /* More padding for detail views */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
     max-width: 800px;
     margin: 2rem auto;
-    padding: 1.5rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    /* Standardized margin */
 }
 
-.job-details-card {
-    margin-bottom: 2rem;
+/* Specific for job-details-container from later in the original CSS */
+.job-details-container {
+    font-family: var(--font-primary);
+    /* Ensure it uses the theme font */
 }
 
+.detail-card h2,
 .job-title {
+    /* .job-title from job-details-container */
+    color: var(--primary-color);
+    margin-bottom: 25px;
     font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 1rem;
+    /* Ensure consistent title size */
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
 }
 
 .job-description {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 1rem;
+    /* from job-details-container */
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.detail-item {
+    margin-bottom: 25px;
+}
+
+.detail-item h3 {
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    /* Secondary color for sub-headings */
+    font-size: 1.3rem;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 8px;
+    color: var(--text-color);
 }
 
 .job-details-card p {
+    /* from job-details-container */
     font-size: 1rem;
-    margin: 0.5rem 0;
+    margin: 0.75rem 0;
 }
 
 .job-details-actions {
+    /* from job-details-container */
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    /* Align buttons to the start */
     gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
 }
+
+
+/* --- Form --- */
+.form-container {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 35px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.form-container h2 {
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    /* Consistent form title */
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    /* Labels in secondary color */
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    /* More padding */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* Important for width 100% */
+    background-color: #fff;
+    /* Ensure clear background */
+    color: var(--text-color);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    /* Min height for textareas */
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Default to 1 column for mobile */
+    gap: 20px;
+}
+
+@media (min-width: 600px) {
+
+    /* Two columns on wider screens */
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+.error-message {
+    background-color: #f8d7da;
+    /* Keep for standard error indication */
+    color: #721c24;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+
+/* --- Buttons --- */
+.button-group {
+    display: flex;
+    gap: 15px;
+    /* Increased gap */
+    margin-top: 25px;
+    justify-content: flex-start;
+    /* Default alignment */
+}
+
+.job-actions .button-group,
+.company-actions .button-group {
+    justify-content: space-between;
+    /* Override for actions if needed */
+}
+
 
 .btn {
-    padding: 0.75rem 1.5rem;
+    display: inline-block;
+    font-weight: 500;
+    /* Slightly bolder */
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.6rem 1.2rem;
+    /* Larger padding */
     font-size: 1rem;
-    border: none;
+    line-height: 1.5;
     border-radius: 5px;
+    /* Consistent rounding */
+    transition: all 0.2s ease-in-out;
+    /* Smoother transition for all properties */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for buttons */
 }
 
+.btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
 
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    color: var(--light-text);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--primary-color), 10%);
+    /* Darken function needs SASS or manual hex */
+    border-color: darken(var(--primary-color), 12%);
+    background-color: #4A6028;
+    /* Manual darken */
+    border-color: #415322;
+}
 
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+    color: var(--light-text);
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #7A3D11;
+    /* Manual darken */
+    border-color: #6E360F;
+}
+
+.btn-info {
+    color: var(--light-text);
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+}
+
+.btn-info:hover {
+    background-color: #3F72A4;
+    /* Manual darken */
+    border-color: #36638F;
+}
+
+.btn-warning {
+    color: var(--text-color);
+    /* Dark text on yellow/gold */
+    background-color: var(--accent-color);
+    /* Using accent as warning base */
+    border-color: var(--accent-color);
+}
+
+.btn-warning:hover {
+    background-color: #C8941C;
+    /* Manual darken */
+    border-color: #B68518;
+}
+
+.btn-danger {
+    color: var(--light-text);
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #8B2424;
+    /* Manual darken */
+    border-color: #7D2020;
+}
+
+.btn-disabled,
+.btn:disabled {
+    /* Ensure :disabled also covered */
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* --- Apply Status & Job Section (Dashboard-like) --- */
+.apply-status {
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--primary-color);
+    /* Green for success/applied */
+    font-size: 1.05rem;
+}
+
+.job-section {
+    /* This seems like a generic container, similar to detail-card */
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.job-section h3 {
+    /* Headings within these sections */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 1.7rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+
+/* --- Dashboard Table --- */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    /* More padding */
+    text-align: left;
+}
+
+.dashboard-table th {
+    background-color: var(--light-bg);
+    /* Light beige for header */
+    font-weight: bold;
+    color: var(--primary-color);
+    font-family: var(--font-headings);
+    font-size: 1.05rem;
+}
+
+.dashboard-table tr:nth-child(even) {
+    background-color: #fdfbf5;
+    /* Very subtle alternate row color */
+}
+
+.dashboard-table tr:hover td {
+    background-color: #f5efdf;
+    /* Hover for table rows */
+}
+
+/* --- Utility classes (optional but useful) --- */
+.container {
+    /* General purpose container */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
 }
