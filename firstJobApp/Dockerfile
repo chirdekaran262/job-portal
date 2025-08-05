@@ -1,18 +1,25 @@
-# Use a base Java image
-FROM openjdk:17-jdk-slim
+# Step 1: Build the application using Maven
+FROM maven:3.9.6-eclipse-temurin-17 as builder
 
-# Set environment variables
-ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
-    JAVA_OPTS=""
-
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the JAR file into the container
-COPY target/firstJobApp-0.0.1-SNAPSHOT.jar app.jar
+# Copy Maven project files
+COPY pom.xml .
+COPY src ./src
 
-# Expose the port your Spring Boot app runs on
-EXPOSE 8081
+# Package the application
+RUN mvn clean package -DskipTests
 
-# Run the app
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+# Step 2: Run the application
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+
+# Copy the built jar file from the previous stage
+COPY --from=builder /app/target/*.jar app.jar
+
+# Set environment variables for application
+ENV SPRING_PROFILES_ACTIVE=prod
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
