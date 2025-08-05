@@ -1,14 +1,13 @@
+# 🌾 AgriConnect - Job Portal for Agriculture Sector
 
-# 💼 Job Portal Application
-
-A full-stack **Job Portal** web application built using **Spring Boot** (backend) and **React.js** (frontend), offering seamless interaction between job seekers and employers.
+AgriConnect is a full-stack web application built with **Spring Boot** and **React.js** to bridge the gap between **farmers** and **farm workers**. Farmers can list agricultural jobs, and farm workers can apply or post their "Open to Work" status.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-job-portal/
+agri-connect/
 ├── backend/           # Spring Boot backend (Maven project)
 ├── frontend/          # React frontend
 └── README.md
@@ -37,7 +36,7 @@ job-portal/
    ./mvnw spring-boot:run
    ```
 
-3. Default Port: `http://localhost:8080`
+3. App will be available at: `http://localhost:8080`
 
 ---
 
@@ -64,24 +63,24 @@ job-portal/
 
 ## ✨ Features
 
-- 📝 Add and Manage Job Listings
-- 🔍 Job Search and Filtering
-- 📄 Apply to Jobs with Resume & Cover Letter
-- 🧑‍💼 Role-Based Authentication (Admin, Recruiter, User)
-- 🏢 Company Info & User Reviews
+- 🌱 Farmers can Add and Manage Job Listings
+- 🌾 Farm Workers can Search and Apply for Jobs
+- 🧑‍🌾 Post "Open to Work" status as a Farm Worker
+- 🧑‍💼 Role-Based Authentication (Admin, Farmer, Worker)
+- 🏡 Display Company/Farm Info & Reviews
 - 🔐 Secure Login with JWT Authentication
 - 📦 RESTful API with Spring Boot
-- 🎨 Interactive and Responsive UI with React
+- 🎨 Responsive UI with React.js
 
 ---
 
 ## 🔐 Role-Based Access Control
 
-| Role      | Functionality                                      |
-|-----------|----------------------------------------------------|
-| Admin     | Manage all users, jobs, and companies              |
-| Recruiter | Post jobs, manage their job listings               |
-| User      | View and apply to jobs, submit reviews             |
+| Role    | Functionality                                       |
+|---------|-----------------------------------------------------|
+| Admin   | Manage users, farms, jobs, and reviews              |
+| Farmer  | Post and manage job listings                        |
+| Worker  | View/apply to jobs, post "Open to Work", submit reviews |
 
 ---
 
@@ -107,36 +106,48 @@ job-portal/
 | Method | Endpoint             | Description                |
 |--------|----------------------|----------------------------|
 | GET    | `/jobs`              | Get all jobs               |
-| POST   | `/jobs`              | Add new job (Recruiter)    |
-| GET    | `/company`           | Get all companies          |
-| POST   | `/company`           | Add new company (Admin)    |
+| POST   | `/jobs`              | Add new job (Farmer)       |
+| GET    | `/company`           | Get all farms              |
+| POST   | `/company`           | Add new farm (Admin)       |
 | GET    | `/reviews`           | Get all reviews            |
-Explore other api in controller class
+
+Explore other APIs in controller classes.
+
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! If you'd like to improve or extend this project:
+We welcome community contributions! To get started:
 
 1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'feat: add your feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
+2. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m 'feat: add your feature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/your-feature
+   ```
 5. Open a Pull Request
 
 ---
 
-## 📌 Planned Features
+## 🎯 Planned Features
 
-- 🎯 Role-based authentication with distinct dashboards for Admin, Recruiter, and Job Seeker in fronted code
+- Separate dashboards for Admin, Farmer, and Worker in the frontend
 
+---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 ## 📧 Contact
 
-Maintained by [Karan Chire](mailto:chirdekaran262@gmail.com). Feel free to reach out with questions or suggestions!
+Maintained by [Karan Chire](mailto:chirdekaran262@gmail.com).
