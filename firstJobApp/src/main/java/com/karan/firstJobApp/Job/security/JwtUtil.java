@@ -18,10 +18,10 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret:defaultSecretKey123!@#$ThisShouldBeChangedInProduction}")
+    @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${jwt.expiration:86400000}") // Default: 24 hours
+    @Value("${jwt.expiration}") // Default: 24 hours
     private long expiration;
 
     // Generate token for user
