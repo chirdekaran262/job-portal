@@ -40,6 +40,42 @@ public class AuthController {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @GetMapping("/google/url")
+    public ResponseEntity<?> getGoogleAuthUrl() {
+        // This endpoint can provide the Google OAuth URL to the frontend
+        Map<String, String> response = new HashMap<>();
+        response.put("url", "/oauth2/authorization/google");
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/user/current")
+    public ResponseEntity<?> getCurrentUser(@RequestHeader("Authorization") String authHeader) {
+        try {
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                String jwt = authHeader.substring(7);
+                String username = jwtUtil.extractUsername(jwt);
+
+                Users user = userRepo.findByUsername(username);
+                if (user == null) {
+                    // Try to find by email in case of OAuth2 login
+                    user = userRepo.findByEmail(username);
+                }
+
+                if (user != null) {
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("id", user.getId());
+                    response.put("username", user.getUsername());
+                    response.put("email", user.getEmail());
+                    response.put("fullName", user.getFullName());
+                    response.put("role", user.getRole());
+                    return ResponseEntity.ok(response);
+                }
+            }
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody Users users) {
         // Check if username already exists
@@ -124,4 +160,5 @@ public class AuthController {
             return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
     }
+
 }

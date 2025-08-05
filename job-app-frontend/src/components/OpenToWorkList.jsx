@@ -19,7 +19,8 @@ const OpenToWorkList = () => {
                         'Content-Type': 'application/json'
                     }
                 });
-
+                console.log('Fetching OpenToWork profiles with token:', token);
+                console.log('Response status:', response.status);
                 if (response.ok) {
                     const data = await response.json();
                     setProfiles(data);

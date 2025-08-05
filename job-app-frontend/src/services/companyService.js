@@ -58,10 +58,23 @@ export const getAllCompanies = async () => {
         const response = await fetch('/company', { headers: buildHeaders() });
         if (!response.ok) throw new Error('Failed to fetch companies');
         const data = await response.json(); // <-- Fix: extract JSON body
-        console.log('Response from getAllCompanies:', data);
+        // console.log('Response from getAllCompanies:', data);
+        console.log('Description:', data.description); // Debugging line
         return data;
     } catch (error) {
         console.error('Error fetching companies:', error);
+        throw error;
+    }
+};
+
+export const getCompanyById = async (id) => {
+    try {
+        const response = await fetch(`/company/${id}`, { headers: buildHeaders() });
+        if (!response.ok) throw new Error('Failed to fetch company details');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching company details:', error);
         throw error;
     }
 };

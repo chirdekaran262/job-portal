@@ -1,0 +1,32 @@
+*   [33m55521a5[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m Merge branch 'main' of https://github.com/chirdekaran262/job-portal
+[31m|[m[32m\[m  
+[31m|[m *   [33mead2cd9[m[33m ([m[1;31morigin/main[m[33m)[m Merge pull request #2 from chirdekaran262/feature/improve-UI
+[31m|[m [33m|[m[34m\[m  
+[31m|[m [33m|[m [34m|[m * [33m2e04945[m[33m ([m[1;35mrefs/stash[m[33m)[m WIP on feature/improve-UI: b9a1d0d Add backed logic for opentowork
+[31m|[m [33m|[m[31m_[m[34m|[m[31m/[m[36m|[m 
+[31m|[m[31m/[m[33m|[m [34m|[m [36m|[m 
+[31m|[m [33m|[m [34m|[m * [33md3e09bd[m index on feature/improve-UI: b9a1d0d Add backed logic for opentowork
+[31m|[m [33m|[m[31m_[m[34m|[m[31m/[m  
+[31m|[m[31m/[m[33m|[m [34m|[m   
+* [33m|[m [34m|[m [33mb9a1d0d[m[33m ([m[1;32mfeature/improve-UI[m[33m)[m Add backed logic for opentowork
+* [33m|[m [34m|[m [33m9a1a5ee[m complete functinality of opentoeork
+[34m|[m [33m|[m[34m/[m  
+[34m|[m[34m/[m[33m|[m   
+* [33m|[m [33m90f2eff[m[33m ([m[1;31morigin/feature/improve-UI[m[33m)[m add the opentowork feature
+* [33m|[m [33m5951228[m Add the delete functinality  on jon application
+* [33m|[m [33m10ef2d0[m Add the view details on jon application
+* [33m|[m [33meed3f0d[m Add design in header
+* [33m|[m [33m2ea0054[m improve ui for header and etc
+[33m|[m[33m/[m  
+* [33m8065f15[m[33m ([m[1;32mfeature/your-feature-name[m[33m)[m Version 1.1
+* [33mb29b4ff[m Add the application status update function
+* [33mef7b4a5[m Add the apply on job function
+* [33m1508096[m Add the fronted functinality version 1.0
+* [33mfc4e548[m Update README.md
+* [33m90353bf[m feat: implement role-based authentication with specific functionality per user role
+*   [33ma6db0ef[m Merge branch 'main' of https://github.com/chirdekaran262/job-portal
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m0828d86[m Create README.md
+* [1;32m|[m [33m8bd9bd3[m add the security
+[1;32m|[m[1;32m/[m  
+* [33me1002c0[m first commit

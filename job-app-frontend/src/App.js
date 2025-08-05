@@ -18,74 +18,81 @@ import './styles/main.css';
 import CompanyList from './components/CompanyList'; // <-- import at top
 import UserProfile from './components/UserProfile';
 import OpenToWorkList from './components/OpenToWorkList';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import CompanyDetails from './components/CompanyDetails';
 
-// <-- import at top
 function App() {
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
   return (
-    <AuthProvider>
-      <Router>
-        <div className="app">
-          <Header />
-          <main className="main-content">
-            <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<JobList />} />
-              <Route path="/jobs/:id" element={<JobDetails />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/companies" element={<CompanyList />} />
-              {/* Protected routes - Job seeker */}
-              {/* <Route path="/jobs/:jobId/apply" element={
-                <ProtectedRoute requiredRole="ROLE_USER">
-                  <JobApplicationForm />
-                </ProtectedRoute>
-              } /> */}
-              <Route path="/applications" element={
-                <ProtectedRoute requiredRole="ROLE_USER">
-                  <UserApplications />
-                </ProtectedRoute>
-              } />
-              <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <AuthProvider>
+        <Router>
+          <div className="app">
+            <Header />
+            <main className="">
+              <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<JobList />} />
+                <Route path="/jobs/:id" element={<JobDetails />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/companies" element={<CompanyList />} />
+                {/* Protected routes - Job seeker */}
+                {/* <Route path="/jobs/:jobId/apply" element={
+                  <ProtectedRoute requiredRole="ROLE_USER">
+                    <JobApplicationForm />
+                  </ProtectedRoute>
+                } /> */}
+                <Route path="/companies/:id" element={<CompanyDetails />} />
 
-              {/* Protected routes - Company */}
-              <Route path="/add" element={
-                <ProtectedRoute requiredRole="ROLE_COMPANY">
-                  <JobForm />
-                </ProtectedRoute>
-              } />
-              <Route path="/edit/:id" element={
-                <ProtectedRoute requiredRole="ROLE_COMPANY">
-                  <JobForm />
-                </ProtectedRoute>
-              } />
-              <Route path="/company/dashboard" element={
-                <ProtectedRoute requiredRole="ROLE_COMPANY">
-                  <CompanyDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/company/applications" element={
-                <ProtectedRoute requiredRole="ROLE_COMPANY">
-                  <CompanyApplications />
-                </ProtectedRoute>
-              } />
-              <Route path="/opentowork/*" element={
-                <ProtectedRoute requiredRole="ROLE_USER">
-                  <OpenToWork />
-                </ProtectedRoute>
-              } />
-              <Route path="/company/jobseekers" element={
-                <ProtectedRoute requiredRole="ROLE_COMPANY">
-                  <OpenToWorkList />
-                </ProtectedRoute>
-              } />
+                <Route path="/applications" element={
+                  <ProtectedRoute requiredRole="ROLE_USER">
+                    <UserApplications />
+                  </ProtectedRoute>
+                } />
+                <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
 
-              {/* Fallback route */}
-            </Routes>
+                {/* Protected routes - Company */}
+                <Route path="/add" element={
+                  <ProtectedRoute requiredRole="ROLE_COMPANY">
+                    <JobForm />
+                  </ProtectedRoute>
+                } />
+                <Route path="/edit/:id" element={
+                  <ProtectedRoute requiredRole="ROLE_COMPANY">
+                    <JobForm />
+                  </ProtectedRoute>
+                } />
+                <Route path="/company/dashboard" element={
+                  <ProtectedRoute requiredRole="ROLE_COMPANY">
+                    <CompanyDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/company/applications" element={
+                  <ProtectedRoute requiredRole="ROLE_COMPANY">
+                    <CompanyApplications />
+                  </ProtectedRoute>
+                } />
+                <Route path="/opentowork/*" element={
+                  <ProtectedRoute requiredRole="ROLE_USER">
+                    <OpenToWork />
+                  </ProtectedRoute>
+                } />
+                <Route path="/company/jobseekers" element={
+                  <ProtectedRoute requiredRole="ROLE_COMPANY">
+                    <OpenToWorkList />
+                  </ProtectedRoute>
+                } />
 
-          </main>
-        </div>
-      </Router>
-    </AuthProvider>
+                {/* Fallback route */}
+              </Routes>
+
+            </main>
+          </div>
+        </Router>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   );
 }
 

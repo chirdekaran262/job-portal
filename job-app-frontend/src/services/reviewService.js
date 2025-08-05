@@ -1,5 +1,5 @@
 // src/services/reviewService.js
-import { getToken } from './authService';
+import { getToken, buildHeaders } from './authService';
 
 const API_URL = 'http://localhost:8081';
 
@@ -171,6 +171,59 @@ export const addReview = async (companyId, reviewData) => {
             return await response.json();
         } else {
             return await response.text();
+        }
+    } catch (error) {
+        console.error('Error adding review:', error);
+        throw error;
+    }
+};
+
+export const getCompanyReviews = async (companyId) => {
+    try {
+        const response = await fetch(`/company/${companyId}/reviews`, {
+            headers: buildHeaders()
+        });
+        if (!response.ok) throw new Error('Failed to fetch reviews');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        throw error;
+    }
+};
+
+export const addCompanyReview = async (companyId, reviewData) => {
+    try {
+        const review = {
+            title: reviewData.title,
+            description: reviewData.description,
+            rating: reviewData.rating
+        };
+
+        const response = await fetch(`${API_URL}/company/${companyId}/reviews`, {
+            method: 'POST',
+            headers: {
+                ...buildHeaders(), // Fix: spread the headers instead of passing the function
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Failed to add review');
+        }
+
+        try {
+            // Try to parse as JSON first
+            const data = await response.json();
+            return data;
+        } catch (parseError) {
+            // If JSON parsing fails, return constructed object
+            return {
+                id: Date.now(),
+                ...review,
+                createdAt: new Date().toISOString()
+            };
         }
     } catch (error) {
         console.error('Error adding review:', error);

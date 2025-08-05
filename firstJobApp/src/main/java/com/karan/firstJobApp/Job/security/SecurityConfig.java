@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Important for CORS preflight requests
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/auth/**").permitAll() // All auth endpoints are public
                         .requestMatchers("/api/jobs").permitAll()
                         .requestMatchers("/api/jobs/**").permitAll()
                         .requestMatchers("/jobs").permitAll() // Adding non-API versions too

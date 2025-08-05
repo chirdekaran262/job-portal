@@ -37,6 +37,7 @@ public class CompanyController {
         if(companyList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return empty list with OK status
         }
+
         return new ResponseEntity<>(companyList, HttpStatus.OK);
     }
 
